@@ -11,10 +11,10 @@ install:
   - luarocks install --local busted
 
 before_script:
-  - luacheck . -q
+  - /home/travis/.luarocks/bin/luacheck . -q
 
 script:
-  - busted
+  - /home/travis/.luarocks/bin/busted
   - curl -fsSLo release.sh https://raw.githubusercontent.com/BigWigsMods/packager/master/release.sh
   - chmod +x release.sh
   #- ./release.sh
