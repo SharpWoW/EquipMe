@@ -6,4 +6,10 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ]]
 
-local NAME, T = ...
+local _, T = ...
+
+local i18n = T.i18n
+
+local L = i18n:register('enUS', 'English (US)', 'English (US)', true)
+
+L['hello'] = 'Hello, World!'

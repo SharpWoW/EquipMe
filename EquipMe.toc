@@ -18,7 +18,7 @@
 
 # Localization/Internationalization
 src/i18n.lua
-src/locales/en-US.lua
+src/locales/en_US.lua
 
 # Core components
 src/logging.lua
