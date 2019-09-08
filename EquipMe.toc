@@ -9,7 +9,7 @@
 ## Author: Sharparam
 ## Version: @project-version@
 ## SavedVariables: EquipMeDB
-## OptionalDeps: LibStub, CallbackHandler-1.0, Ace3, LibSharedMedia-3.0, LibBodyguard-1.0
+## OptionalDeps: LibStub, CallbackHandler-1.0, Ace3, LibSharedMedia-3.0
 # ## X-Curse-Project-ID: 1234
 # ## X-WoWI-ID: 1234
 
