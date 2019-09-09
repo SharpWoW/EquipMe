@@ -13,7 +13,7 @@ local FALLBACK_CODE = 'enUS'
 -- Create upvalues in case locale code is called from performance-critical
 -- code.
 local select = select
-local GetLocale = _G.GetLocale
+local GetLocale = GetLocale
 local sprintf = string.format
 local setmetatable = setmetatable
 local type = type

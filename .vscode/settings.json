@@ -1,0 +1,8 @@
+{
+    "Lua.diagnostics.globals": [
+        "CreateFrame",
+        "GetLocale",
+        "SlashCmdList"
+    ],
+    "Lua.runtime.version": "Lua 5.1"
+}
