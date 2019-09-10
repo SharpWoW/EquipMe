@@ -1,0 +1,14 @@
+package-as: EquipMe
+
+enable-nolib-creation: yes
+
+externals:
+    extern/LibStub:
+        url: svn://svn.wowace.com/wow/libstub/mainline/trunk
+        tag: latest
+    extern/CallbackHandler-1.0:
+        url: svn://svn.wowace.com/wow/callbackhandler/mainline/trunk/CallbackHandler-1.0
+        tag: latest
+    extern/LibSharedMedia-3.0:
+        url: svn://svn.wowace.com/wow/libsharedmedia-3-0/mainline/trunk
+        tag: latest

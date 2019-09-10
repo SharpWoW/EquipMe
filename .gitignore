@@ -577,3 +577,6 @@ MigrationBackup/
 
 /release.sh
 /.release
+
+# Ignore external libraries (pulled in with packager)
+/extern
