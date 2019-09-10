@@ -12,4 +12,4 @@ local i18n = T.i18n
 
 local L = i18n:register("esES", "Español (España)", "Spanish (Spain)")
 
---@localization(locale="esES", format="lua_additive_table", handle-subnamespaces="concat", namespace-delimiter=".")
+--@localization(locale="esES", format="lua_additive_table", handle-subnamespaces="concat", namespace-delimiter=".")@
