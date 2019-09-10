@@ -4,34 +4,34 @@ enable-nolib-creation: yes
 
 externals:
     extern/LibStub:
-        url: svn://svn.wowace.com/wow/libstub/mainline/trunk
+        url: https://repos.wowace.com/wow/libstub/trunk
         tag: latest
     extern/CallbackHandler-1.0:
-        url: svn://svn.wowace.com/wow/callbackhandler/mainline/trunk/CallbackHandler-1.0
+        url: https://repos.curseforge.com/wow/callbackhandler/trunk/CallbackHandler-1.0
         tag: latest
     extern/LibDBIcon-1.0:
-        url: svn://svn.wowace.com/wow/libdbicon-1-0/mainline/trunk
+        url: https://repos.wowace.com/wow/libdbicon-1-0/trunk/LibDBIcon-1.0
         tag: latest
     extern/LibSharedMedia-3.0:
-        url: svn://svn.wowace.com/wow/libsharedmedia-3-0/mainline/trunk
+        url: https://repos.curseforge.com/wow/libsharedmedia-3-0/trunk/LibSharedMedia-3.0
         tag: latest
     extern/AceConfig-3.0:
-        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConfig-3.0
+        url: https://repos.curseforge.com/wow/ace3/trunk/AceConfig-3.0
         tag: latest
     extern/AceConsole-3.0:
-        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConsole-3.0
+        url: https://repos.curseforge.com/wow/ace3/trunk/AceConsole-3.0
         tag: latest
     extern/AceDB-3.0:
-        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceDB-3.0
+        url: https://repos.curseforge.com/wow/ace3/trunk/AceDB-3.0
         tag: latest
     extern/AceDBOptions-3.0:
-        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceDBOptions-3.0
+        url: https://repos.curseforge.com/wow/ace3/trunk/AceDBOptions-3.0
         tag: latest
     extern/AceGUI-3.0:
-        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceGUI-3.0
+        url: https://repos.curseforge.com/wow/ace3/trunk/AceGUI-3.0
         tag: latest
     extern/AceGUI-3.0-SharedMediaWidgets:
-        url: svn://svn.wowace.com/wow/ace-gui-3-0-shared-media-widgets/mainline/trunk
+        url: https://repos.wowace.com/wow/ace-gui-3-0-shared-media-widgets/trunk
         tag: latest
 
 tools-used:

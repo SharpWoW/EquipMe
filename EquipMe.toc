@@ -15,39 +15,39 @@
 
 # External libraries
 #@no-lib-strip@
-extern/LibStub/LibStub.lua
-extern/CallbackHandler-1.0/CallbackHandler-1.0.xml
-extern/LibSharedMedia-3.0/lib.xml
+extern\LibStub\LibStub.lua
+extern\CallbackHandler-1.0\CallbackHandler-1.0.xml
+extern\LibSharedMedia-3.0\lib.xml
 #@end-no-lib-strip@
 
-lib/LibDataBroker-1-1/LibDataBroker-1.1.lua
+lib\LibDataBroker-1-1\LibDataBroker-1.1.lua
 
 #@no-lib-strip@
-extern/LibDBIcon-1.0/LibDBIcon-1.0/LibDBIcon-1.0.lua
-extern/AceConfig-3.0/AceConfig-3.0.xml
-extern/AceConsole-3.0/AceConsole-3.0.xml
-extern/AceDB-3.0/AceDB-3.0.xml
-extern/AceDBOptions-3.0/AceDBOptions-3.0.xml
-extern/AceGUI-3.0/AceGUI-3.0.xml
-extern/AceGUI-3.0-SharedMediaWidgets/widget.xml
+extern\LibDBIcon-1.0\LibDBIcon-1.0.lua
+extern\AceConfig-3.0\AceConfig-3.0.xml
+extern\AceConsole-3.0\AceConsole-3.0.xml
+extern\AceDB-3.0\AceDB-3.0.xml
+extern\AceDBOptions-3.0\AceDBOptions-3.0.xml
+extern\AceGUI-3.0\AceGUI-3.0.xml
+extern\AceGUI-3.0-SharedMediaWidgets\widget.xml
 #@end-no-lib-strip@
 
-# Localization/Internationalization
-src/i18n.lua
-src/locales/en_US.lua
-src/locales/de_DE.lua
-src/locales/es_ES.lua
-src/locales/es_MX.lua
-src/locales/fr_FR.lua
-src/locales/it_IT.lua
-src/locales/ko_KO.lua
-src/locales/pt_BR.lua
-src/locales/ru_RU.lua
-src/locales/zh_CN.lua
-src/locales/zh_TW.lua
+# Localization\Internationalization
+src\i18n.lua
+src\locales\en_US.lua
+src\locales\de_DE.lua
+src\locales\es_ES.lua
+src\locales\es_MX.lua
+src\locales\fr_FR.lua
+src\locales\it_IT.lua
+src\locales\ko_KO.lua
+src\locales\pt_BR.lua
+src\locales\ru_RU.lua
+src\locales\zh_CN.lua
+src\locales\zh_TW.lua
 
 # Core components
-src/utils.lua
-src/logging.lua
-src/commands.lua
-src/broker.lua
+src\utils.lua
+src\logging.lua
+src\commands.lua
+src\broker.lua
