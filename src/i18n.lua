@@ -26,14 +26,15 @@ local i18n = {
 
 local locale_mt = {
   __index = function(locale, key)
-    return locale:resolve(key)
+    return (locale:resolve(key))
   end,
   __newindex = function(locale, key, value)
     locale.strings[key] = value
   end,
   __call = function(locale, key, ...)
-    if select('#', ...) < 1 then return locale:resolve(key) end
-    return sprintf(locale:resolve(key), ...)
+    local resolved = (locale:resolve(key))
+    if select('#', ...) < 1 then return resolved end
+    return sprintf(resolved, ...)
   end,
   __tostring = function(locale)
     return locale.code
@@ -52,20 +53,27 @@ function i18n:register(code, name, english_name, is_default)
   if is_default then
     locale.resolve = function(tbl, key)
       if tbl.strings[key] then
-        return tbl.strings[key]
+        return tbl.strings[key], true
       else
-        return 'MISSING STRING: ' .. key
+        return 'MISSING STRING: ' .. key, false
       end
     end
   else
     locale.resolve = function(tbl, key)
       if tbl.strings[key] then
-        return tbl.strings[key]
+        return tbl.strings[key], true
       else
         return self:get_default()[key]
       end
     end
   end
+
+  locale.has_key = function(tbl, key)
+    local _, found = tbl:resolve(key)
+    return found
+  end
+
+  locale.try_get = locale.resolve
 
   self.locales[code] = setmetatable(locale, locale_mt)
   return self.locales[code]

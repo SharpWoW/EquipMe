@@ -7,10 +7,16 @@
 ]]
 
 local NAME, T = ...
+local utils = T.utils
+local colorize = utils.colorize
+local L = T.i18n:get()
 
+local print = print
+local select = select
 local sprintf = string.format
 
-local MSG_FORMAT = sprintf('%s [%%s] %%s', NAME)
+local NAME_COLOR = utils.colors.BLUE
+local MSG_FORMAT = sprintf('%s %s%%s%s %%s', colorize(NAME, NAME_COLOR), colorize('[', 'GRAY'), colorize(']', 'GRAY'))
 
 local logging = {
   levels = {
@@ -24,6 +30,18 @@ local logging = {
 
 logging.level = logging.levels.INFO
 
+local COLORS = {
+  NAME = NAME_COLOR,
+  LEVELS = {
+    [logging.level.DEBUG] = utils.colors.GREEN,
+    [logging.level.INFO] = utils.colors.WHITE,
+    [logging.level.WARN] = utils.colors.YELLOW,
+    [logging.level.ERROR] = utils.colors.RED
+  }
+}
+
+local FORMATS = {}
+
 local function format(message, ...)
   if select('#', ...) < 1 then return message end
   return sprintf(message, ...)
@@ -31,8 +49,13 @@ end
 
 function logging:log(level, message, ...)
   if level < self.level then return end
+  local localized, found = L:try_get(message)
+  if found then
+    message = localized
+  end
   local formatted = format(message, ...)
-  local msg = sprintf(MSG_FORMAT, self.level_names[level], formatted)
+  local level_format = FORMATS[level]
+  local msg = sprintf(level_format, formatted)
   print(msg)
 end
 
@@ -41,6 +64,8 @@ for level_name, level in pairs(logging.levels) do
   logging[level_name:lower()] = function(self, message, ...)
     self:log(level, message, ...)
   end
+  local color = COLORS.LEVELS[level]
+  FORMATS[level] = sprintf(MSG_FORMAT, colorize(level_name, color), '%s')
 end
 
 T.logging = logging
