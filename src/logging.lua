@@ -33,10 +33,10 @@ logging.level = logging.levels.INFO
 local COLORS = {
   NAME = NAME_COLOR,
   LEVELS = {
-    [logging.level.DEBUG] = utils.colors.GREEN,
-    [logging.level.INFO] = utils.colors.WHITE,
-    [logging.level.WARN] = utils.colors.YELLOW,
-    [logging.level.ERROR] = utils.colors.RED
+    [logging.levels.DEBUG] = utils.colors.GREEN,
+    [logging.levels.INFO] = utils.colors.WHITE,
+    [logging.levels.WARN] = utils.colors.YELLOW,
+    [logging.levels.ERROR] = utils.colors.RED
   }
 }
 
