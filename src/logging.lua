@@ -16,7 +16,7 @@ local select = select
 local sprintf = string.format
 
 local NAME_COLOR = utils.colors.BLUE
-local MSG_FORMAT = sprintf('%s %s%%s%s %%s', colorize(NAME, NAME_COLOR), colorize('[', 'GRAY'), colorize(']', 'GRAY'))
+local MSG_FORMAT = sprintf("%s %s%%s%s %%s", colorize(NAME, NAME_COLOR), colorize("[", "GRAY"), colorize("]", "GRAY"))
 
 local logging = {
   levels = {
@@ -43,7 +43,7 @@ local COLORS = {
 local FORMATS = {}
 
 local function format(message, ...)
-  if select('#', ...) < 1 then return message end
+  if select("#", ...) < 1 then return message end
   return sprintf(message, ...)
 end
 
@@ -65,7 +65,7 @@ for level_name, level in pairs(logging.levels) do
     self:log(level, message, ...)
   end
   local color = COLORS.LEVELS[level]
-  FORMATS[level] = sprintf(MSG_FORMAT, colorize(level_name, color), '%s')
+  FORMATS[level] = sprintf(MSG_FORMAT, colorize(level_name, color), "%s")
 end
 
 T.logging = logging

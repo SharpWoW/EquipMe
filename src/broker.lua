@@ -8,18 +8,18 @@
 
 local NAME, T = ...
 
-local ldb = LibStub:GetLibrary('LibDataBroker-1.1')
-local icon = LibStub:GetLibrary('LibDBIcon-1.0')
+local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
+local icon = LibStub:GetLibrary("LibDBIcon-1.0")
 
 local broker = {}
 
 local data = {
   label = NAME,
-  icon = 'Interface\\AddOns\\EquipMe\\images\\logo_broker.tga',
+  icon = "Interface\\AddOns\\EquipMe\\images\\logo_broker.tga",
   tocname = NAME
 }
 
-local obj = ldb:NewDataObject('Broker_' .. NAME, data)
+local obj = ldb:NewDataObject("Broker_" .. NAME, data)
 
 function broker:init()
   icon:Register(NAME, obj, nil)

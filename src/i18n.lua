@@ -8,7 +8,7 @@
 
 local _, T = ...
 
-local FALLBACK_CODE = 'enUS'
+local FALLBACK_CODE = "enUS"
 
 -- Create upvalues in case locale code is called from performance-critical
 -- code.
@@ -33,7 +33,7 @@ local locale_mt = {
   end,
   __call = function(locale, key, ...)
     local resolved = (locale:resolve(key))
-    if select('#', ...) < 1 then return resolved end
+    if select("#", ...) < 1 then return resolved end
     return sprintf(resolved, ...)
   end,
   __tostring = function(locale)
@@ -55,7 +55,7 @@ function i18n:register(code, name, english_name, is_default)
       if tbl.strings[key] then
         return tbl.strings[key], true
       else
-        return 'MISSING STRING: ' .. key, false
+        return "MISSING STRING: " .. key, false
       end
     end
   else
@@ -80,11 +80,11 @@ function i18n:register(code, name, english_name, is_default)
 end
 
 function i18n:has(code)
-  return type(self.locales[code] ~= 'nil')
+  return type(self.locales[code] ~= "nil")
 end
 
 function i18n:get_default_code()
-  --print('Getting default code')
+  --print("Getting default code")
   for code, locale in pairs(self.locales) do
     if locale.is_default then
       return code
@@ -105,7 +105,7 @@ function i18n:get(code)
 end
 
 function i18n:get_default()
-  --print('Getting default')
+  --print("Getting default")
   return self.locales[self:get_default_code()]
 end
 

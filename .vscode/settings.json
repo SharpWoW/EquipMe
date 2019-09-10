@@ -6,7 +6,10 @@
         "IsControlKeyDown",
         "IsShiftKeyDown",
         "LibStub",
-        "SlashCmdList"
+        "SlashCmdList",
+        "describe",
+        "setup",
+        "it"
     ],
     "Lua.runtime.version": "Lua 5.1"
 }

@@ -17,30 +17,30 @@ local slash_aliases = { NAME:lower() }
 local commands = {}
 
 local function register(aliases, callback)
-  if type(aliases) ~= 'table' then aliases = {aliases} end
+  if type(aliases) ~= "table" then aliases = {aliases} end
   for _, alias in pairs(aliases) do
     commands[alias] = callback
   end
 end
 
-register('help', function()
-  log:info('TODO: Put help here')
+register("help", function()
+  log:info("TODO: Put help here")
 end)
 
-register('hello', function(_, name)
-  log:info('Hello to yourself, %s!', name or 'Unknown')
+register("hello", function(_, name)
+  log:info("Hello to yourself, %s!", name or "Unknown")
 end)
 
-register('echo', function(msg)
+register("echo", function(msg)
   log:info(msg)
 end)
 
-register('ab', function(_, a, b)
+register("ab", function(_, a, b)
   log:info("AB test: %s %s", a, b)
 end)
 
 for i, alias in ipairs(slash_aliases) do
-  _G['SLASH_' .. NAME:upper() .. i] = '/' .. alias
+  _G["SLASH_" .. NAME:upper() .. i] = "/" .. alias
 end
 
 SlashCmdList[NAME:upper()] = function(msg, _)
@@ -48,10 +48,10 @@ SlashCmdList[NAME:upper()] = function(msg, _)
   local args = split(msg)
 
   if #args < 1 then
-    return commands['help']('')
+    return commands["help"]("")
   end
 
-  local pattern = '^' .. args[1]
+  local pattern = "^" .. args[1]
   table.remove(args, 1)
 
   local matches = {}
@@ -67,6 +67,6 @@ SlashCmdList[NAME:upper()] = function(msg, _)
     return commands[matches[1]](msg, unpack(args))
   end
 
-  matches = table.concat(matches, ', ')
+  matches = table.concat(matches, ", ")
   log:error('Multiple commands match "%s": %s', args[1], matches)
 end

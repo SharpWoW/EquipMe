@@ -10,6 +10,6 @@ local _, T = ...
 
 local i18n = T.i18n
 
-local L = i18n:register('enUS', 'English (US)', 'English (US)', true)
+local L = i18n:register("enUS", "English (US)", "English (US)", true)
 
-L['hello'] = 'Hello, World!'
+L["hello"] = "Hello, World!"

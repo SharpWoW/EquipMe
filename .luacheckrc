@@ -5,20 +5,20 @@ stds.wow = {
     }
   },
   read_globals = {
-    'CreateFrame',
-    'GetLocale'
+    "CreateFrame",
+    "GetLocale"
   }
 }
 
 stds.externs = {
   read_globals = {
-    'LibStub'
+    "LibStub"
   }
 }
 
-std = 'lua51+wow+externs'
+std = "lua51+wow+externs"
 max_line_length = 120
 
 exclude_files = {
-  'lib/LibDataBroker-1-1/**/*.lua'
+  "lib/LibDataBroker-1-1/**/*.lua"
 }
