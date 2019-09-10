@@ -5,6 +5,7 @@
         "GetLocale",
         "IsControlKeyDown",
         "IsShiftKeyDown",
+        "LibStub",
         "SlashCmdList"
     ],
     "Lua.runtime.version": "Lua 5.1"

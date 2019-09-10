@@ -10,7 +10,13 @@ stds.wow = {
   }
 }
 
-std = 'lua51+wow'
+stds.externs = {
+  read_globals = {
+    'LibStub'
+  }
+}
+
+std = 'lua51+wow+externs'
 max_line_length = 120
 
 exclude_files = {

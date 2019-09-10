@@ -10,7 +10,7 @@
 ## Version: @project-version@
 ## SavedVariables: EquipMeDB
 ## OptionalDeps: LibSharedMedia-3.0, Ace3
-# ## X-Curse-Project-ID: 1234
+## X-Curse-Project-ID: 340970
 # ## X-WoWI-ID: 1234
 
 # External libraries
@@ -34,3 +34,4 @@ src/locales/en_US.lua
 src/utils.lua
 src/logging.lua
 src/commands.lua
+src/broker.lua
