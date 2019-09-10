@@ -10,8 +10,6 @@ local _, T = ...
 
 local i18n = T.i18n
 
-local L = i18n:register("enUS", "English (US)", "English (US)", true)
+local L = i18n:register("zhTW", "中文 (中華民國)", "Chinese (Traditional)")
 
-L["hello"] = "Hello, World!"
-
-i18n:register_alias("enGB", "enUS")
+--@localization(locale="zhTW", format="lua_additive_table", handle-subnamespaces="concat", namespace-delimiter=".")

@@ -21,7 +21,8 @@ local pairs = pairs
 
 local i18n = {
   current = nil,
-  locales = {}
+  locales = {},
+  aliases = {}
 }
 
 local locale_mt = {
@@ -79,12 +80,15 @@ function i18n:register(code, name, english_name, is_default)
   return self.locales[code]
 end
 
+function i18n:register_alias(from, to)
+  self.aliases[from] = to
+end
+
 function i18n:has(code)
   return type(self.locales[code] ~= "nil")
 end
 
 function i18n:get_default_code()
-  --print("Getting default code")
   for code, locale in pairs(self.locales) do
     if locale.is_default then
       return code
@@ -95,18 +99,34 @@ function i18n:get_default_code()
 end
 
 function i18n:get(code)
-  if not code then
+  if self.current then
+    code = self.current
+  elseif not code then
     code = GetLocale()
   end
 
   code = code or self:get_default_code()
 
-  return self.locales[code]
+  return self.locales[self.aliases[code] or code]
+end
+
+function i18n:set(code)
+  self.current = code
 end
 
 function i18n:get_default()
-  --print("Getting default")
   return self.locales[self:get_default_code()]
+end
+
+function i18n:get_codes()
+  local codes = {}
+  for k, _ in pairs(self.locales) do
+    codes[#codes + 1] = k
+  end
+  for k, _ in pairs(self.aliases) do
+    codes[#codes + 1] = k
+  end
+  return codes
 end
 
 T.i18n = i18n
