@@ -21,7 +21,9 @@ max_line_length = 120
 
 files = {
   ["src/locales/*.lua"] = {
-    ignore = {}
+    ignore = {
+      "211/L"
+    }
   }
 }
 
