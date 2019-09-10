@@ -12,3 +12,7 @@ stds.wow = {
 
 std = 'lua51+wow'
 max_line_length = 120
+
+exclude_files = {
+  'lib/LibDataBroker-1-1/**/.lua'
+}
