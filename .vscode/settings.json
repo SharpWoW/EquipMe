@@ -1,7 +1,10 @@
 {
     "Lua.diagnostics.globals": [
         "CreateFrame",
+        "GameTooltip",
         "GetLocale",
+        "IsControlKeyDown",
+        "IsShiftKeyDown",
         "SlashCmdList"
     ],
     "Lua.runtime.version": "Lua 5.1"

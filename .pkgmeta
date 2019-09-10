@@ -9,6 +9,14 @@ externals:
     extern/CallbackHandler-1.0:
         url: svn://svn.wowace.com/wow/callbackhandler/mainline/trunk/CallbackHandler-1.0
         tag: latest
+    extern/LibDBIcon-1.0:
+        url: svn://svn.wowace.com/wow/libdbicon-1-0/mainline/trunk
+        tag: latest
     extern/LibSharedMedia-3.0:
         url: svn://svn.wowace.com/wow/libsharedmedia-3-0/mainline/trunk
         tag: latest
+
+tools-used:
+    - libdatabroker-1-1
+
+license-output: LICENSE
