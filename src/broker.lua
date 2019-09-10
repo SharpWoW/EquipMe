@@ -21,11 +21,11 @@ local data = {
 
 local obj = ldb:NewDataObject("Broker_" .. NAME, data)
 
-function broker:init()
+function broker.init()
   icon:Register(NAME, obj, nil)
 end
 
-function broker:set_minimap(enabled)
+function broker.set_minimap(enabled)
   if enabled then
     icon:Show(NAME)
   else
