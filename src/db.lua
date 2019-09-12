@@ -19,9 +19,9 @@ local defaults = {
 }
 
 function T:InitializeDb()
-  self:LogInfo("Initializing DB")
+  self:LogDebug("Initializing DB")
   self.db = LibStub("AceDB-3.0"):New(DB_NAME, defaults, true)
-  self:LogInfo("DB initialized")
+  self:LogDebug("DB initialized")
 end
 
 T:AddInitializer("InitializeDb")

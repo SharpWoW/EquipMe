@@ -8,24 +8,31 @@
 
 local NAME, T = ...
 
+local L = T.I18n:Get()
+
+local function make_translator(suffix)
+  return function(info)
+    local key = table.concat(info, '_'):upper()
+    T:LogDebug("Options key is %s", key)
+    return L[key .. suffix]
+  end
+end
+
 local options = {
-  name = "EquipMe",
+  name = NAME,
   type = "group",
   args = {
+    name = make_translator("_NAME"),
+    desc = make_translator("_DESC"),
     show = {
-      name = "Show options window",
-      desc = "Opens the GUI interface for configuring",
       type = "execute",
       guiHidden = true,
       func = function() T:OpenOptions() end
     },
     general = {
-      name = "General options",
       type = "group",
       args = {
-        log_level = {
-          name = "Log level",
-          desc = "Sets the minimum log level that will print",
+        loglevel = {
           type = "select",
           values = function() return T.logging.level_names end,
           get = function() return T.db.profile.logging.level end,
@@ -42,17 +49,21 @@ local options = {
 local acd
 
 function T:InitializeOptions()
+  self:LogDebug("Initializing options...")
+
   options.args.profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db)
 
   LibStub("AceConfig-3.0"):RegisterOptionsTable(NAME, options)
   acd = LibStub("AceConfigDialog-3.0")
   acd:AddToBlizOptions(NAME, NAME, nil, "general")
   acd:AddToBlizOptions(NAME, "Profiles", NAME, "profiles")
-end
 
+  self:LogDebug("Options initialized!")
+end
 
 function T:OpenOptions()
   if not acd then return end
+  self:LogDebug("Opening options")
   acd:Open(NAME)
 end
 

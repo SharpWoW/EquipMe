@@ -8,6 +8,8 @@
 
 local NAME, T = ...
 
+local L = T.I18n:Get()
+
 _G[NAME] = T
 
 T.initializers = {}
@@ -20,33 +22,34 @@ local embeds = {
 LibStub("AceAddon-3.0"):NewAddon(T, NAME, unpack(embeds))
 
 function T:OnInitialize()
-  self:LogInfo("Initializing...")
+  self:LogDebug("Initializing...")
 
   for _, initializer in pairs(self.initializers) do
     local init_type = type(initializer)
     if init_type == "string" then
       if self[initializer] then
-        self:LogDebug("Calling initializer: %s", initializer)
+        self:LogDebug('Calling initializer "%s"...', initializer)
         self[initializer](self)
+        self:LogDebug('Initializer "%s" called!', initializer)
       else
-        self:LogError("Initializer %s was not found", initializer)
+        self:LogError(L"INITIALIZER_NOT_FOUND", initializer)
       end
     elseif init_type == "function" then
       initializer(self)
     else
-      self:LogError("Unsupported initializer type: %s", init_type)
+      self:LogError(L"UNSUPPORTED_INITIALIZER_TYPE", init_type)
     end
   end
 
-  self:LogInfo("Initialized!")
+  self:LogDebug("Initialized!")
 end
 
 function T:OnEnable()
-  self:LogInfo("Enabled!")
+  self:LogInfo(L"ADDON_ENABLED")
 end
 
 function T:OnDisable()
-  self:LogInfo("Disabled!")
+  self:LogInfo(L"ADDON_DISABLED")
 end
 
 function T:AddInitializer(initializer)

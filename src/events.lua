@@ -20,10 +20,17 @@ function T:PLAYER_REGEN_ENABLED()
   self:LogTrace("PLAYER_REGEN_ENABLED")
 end
 
+local function log_register_event(addon, event)
+  addon:LogDebug("Registering for event %s", event)
+  addon:RegisterEvent(event)
+end
+
 function T:InitializeEvents()
-  self:RegisterEvent("PLAYER_ENTERING_WORLD")
-  self:RegisterEvent("PLAYER_REGEN_DISABLED")
-  self:RegisterEvent("PLAYER_REGEN_ENABLED")
+  self:LogDebug("Initializing events...")
+  log_register_event(self, "PLAYER_ENTERING_WORLD")
+  log_register_event(self, "PLAYER_REGEN_DISABLED")
+  log_register_event(self, "PLAYER_REGEN_ENABLED")
+  self:LogDebug("Events initialized!")
 end
 
 T:AddInitializer("InitializeEvents")

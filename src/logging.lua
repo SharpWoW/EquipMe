@@ -9,7 +9,6 @@
 local _, T = ...
 local utils = T.utils
 local colorize = utils.colorize
-local L = T.I18n:Get()
 
 local select = select
 local sprintf = string.format
@@ -96,10 +95,6 @@ function T:Log(level, message, ...)
   -- Default to INFO if db hasn't been initialized yet
   local threshold = self.db and self.db.profile.logging.level or DEFAULT_THRESHOLD
   if level < threshold then return end
-  local localized, found = L:TryGet(message)
-  if found then
-    message = localized
-  end
   local formatted = format(message, ...)
   local level_format = FORMATS[level]
   self:Printf(level_format, formatted)

@@ -22,7 +22,9 @@ local data = {
 local obj = ldb:NewDataObject("Broker_" .. NAME, data)
 
 function T:InitializeBroker()
+  self:LogDebug("Initializing broker...")
   icon:Register(NAME, obj, nil)
+  self:LogDebug("Broker initialized!")
 end
 
 function broker:SetMinimap(enabled)

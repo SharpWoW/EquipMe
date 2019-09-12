@@ -11,10 +11,13 @@ local NAME, T = ...
 local colorize = T.utils.colorize
 local trim = T.utils.trim
 
+local L = T.I18n:Get()
+
 local commands = {}
 
 local function register(aliases, handler, description)
   if type(aliases) ~= "table" then aliases = {aliases} end
+
   for _, alias in pairs(aliases) do
     commands[alias:lower()] = {
       handler = handler,
@@ -24,7 +27,7 @@ local function register(aliases, handler, description)
 end
 
 register("help", function()
-  T:LogInfo("The following commands are available:")
+  T:LogInfo(L"AVAILABLE_COMMANDS")
   local slash = "/" .. NAME:lower()
   for k, command in pairs(commands) do
     local full = colorize(("%s %s"):format(slash, k), "GREEN")
@@ -34,22 +37,24 @@ register("help", function()
       T:LogInfo(full)
     end
   end
-end, "Shows this help message")
+end, L"COMMANDS_HELP_HELP")
 
 register("options", function(input)
   LibStub("AceConfigCmd-3.0").HandleCommand(T, NAME:lower() .. " options", NAME, input)
-end, "Configure AddOn")
+end, L"COMMANDS_OPTIONS_HELP")
 
 register("testlog", function()
-  T:LogTrace("Testing the trace logging")
-  T:LogDebug("Testing the debug logging")
-  T:LogInfo("Testing the info logging")
-  T:LogWarn("Testing the warn logging")
-  T:LogError("Testing the error logging")
-end, "Tests the log system")
+  T:LogTrace(L"TEST_TRACE")
+  T:LogDebug(L"TEST_DEBUG")
+  T:LogInfo(L"TEST_INFO")
+  T:LogWarn(L"TEST_WARN")
+  T:LogError(L"TEST_ERROR")
+end, L"COMMANDS_TESTLOG_HELP")
 
 function T:InitializeCommands()
+  self:LogDebug("Initializing commands...")
   self:RegisterChatCommand(NAME:lower(), "ChatCommand")
+  self:LogDebug("Commands initialized!")
 end
 
 function T:ChatCommand(input)
@@ -65,7 +70,7 @@ function T:ChatCommand(input)
     end
 
     if #matches == 0 then
-      return T:LogError('No command found that matches "%s"', arg)
+      return T:LogError(L"COMMAND_NOT_FOUND", arg)
     end
 
     if #matches == 1 then
@@ -74,7 +79,7 @@ function T:ChatCommand(input)
     end
 
     matches = table.concat(matches, ", ")
-    T:LogInfo('Multiple commands match "%s": %s', arg, matches)
+    T:LogInfo(L"MULTIPLE_COMMANDS_FOUND", arg, matches)
   else
     commands["help"].handler("")
   end

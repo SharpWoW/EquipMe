@@ -26,20 +26,29 @@ local i18n = {
 }
 
 local locale_mt = {
+  -- L["MY_STRING"]
   __index = function(locale, key)
+    if type(key) == "string" then key = key:upper() end
     return (locale:Resolve(key))
   end,
+
+  -- L["MY_STRING"] = "My translation"
   __newindex = function(locale, key, value)
+    if type(key) == "string" then key = key:upper() end
     locale.strings[key] = value
   end,
+
+  -- L("MY_STRING")
+  -- L("MY_STRING", "format", "args")
   __call = function(locale, key, ...)
     local resolved = (locale:Resolve(key))
     if select("#", ...) < 1 then return resolved end
     return sprintf(resolved, ...)
   end,
-  __tostring = function(locale)
-    return locale.code
-  end
+
+  -- tostring(L)
+  -- print(L)
+  __tostring = function(locale) return locale.code end
 }
 
 function i18n:Register(code, name, english_name, is_default)
@@ -56,7 +65,7 @@ function i18n:Register(code, name, english_name, is_default)
       if tbl.strings[key] then
         return tbl.strings[key], true
       else
-        return "MISSING STRING: " .. key, false
+        return "%" .. key .. "%", false
       end
     end
   else
@@ -128,5 +137,13 @@ function i18n:GetCodes()
   end
   return codes
 end
+
+local i18n_mt = {
+  __call = function(tbl, ...)
+    return tbl:Get()(...)
+  end
+}
+
+setmetatable(i18n, i18n_mt)
 
 T.I18n = i18n
