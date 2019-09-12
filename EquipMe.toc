@@ -42,7 +42,7 @@ src\locales\es_ES.lua
 src\locales\es_MX.lua
 src\locales\fr_FR.lua
 src\locales\it_IT.lua
-src\locales\ko_KO.lua
+src\locales\ko_KR.lua
 src\locales\pt_BR.lua
 src\locales\ru_RU.lua
 src\locales\zh_CN.lua
