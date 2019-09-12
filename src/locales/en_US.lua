@@ -8,10 +8,10 @@
 
 local _, T = ...
 
-local i18n = T.i18n
+local i18n = T.I18n
 
-local L = i18n:register("enUS", "English (US)", "English (US)", true)
+local L = i18n:Register("enUS", "English (US)", "English (US)", true)
 
 L["hello"] = "Hello, World!"
 
-i18n:register_alias("enGB", "enUS")
+i18n:RegisterAlias("enGB", "enUS")

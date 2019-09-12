@@ -8,65 +8,76 @@
 
 local NAME, T = ...
 
+local colorize = T.utils.colorize
 local trim = T.utils.trim
-local split = T.utils.split
 
-local log = T.logging
-
-local slash_aliases = { NAME:lower() }
 local commands = {}
 
-local function register(aliases, callback)
+local function register(aliases, handler, description)
   if type(aliases) ~= "table" then aliases = {aliases} end
   for _, alias in pairs(aliases) do
-    commands[alias] = callback
+    commands[alias:lower()] = {
+      handler = handler,
+      description = description
+    }
   end
 end
 
 register("help", function()
-  log:info("TODO: Put help here")
-end)
+  T:LogInfo("The following commands are available:")
+  local slash = "/" .. NAME:lower()
+  for k, command in pairs(commands) do
+    local full = colorize(("%s %s"):format(slash, k), "GREEN")
+    if command.description then
+      T:LogInfo("%s - %s", full, command.description)
+    else
+      T:LogInfo(full)
+    end
+  end
+end, "Shows this help message")
 
-register("hello", function(_, name)
-  log:info("Hello to yourself, %s!", name or "Unknown")
-end)
+register("options", function(input)
+  LibStub("AceConfigCmd-3.0").HandleCommand(T, NAME:lower() .. " options", NAME, input)
+end, "Configure AddOn")
 
-register("echo", function(msg)
-  log:info(msg)
-end)
+register("testlog", function()
+  T:LogTrace("Testing the trace logging")
+  T:LogDebug("Testing the debug logging")
+  T:LogInfo("Testing the info logging")
+  T:LogWarn("Testing the warn logging")
+  T:LogError("Testing the error logging")
+end, "Tests the log system")
 
-register("ab", function(_, a, b)
-  log:info("AB test: %s %s", a, b)
-end)
-
-for i, alias in ipairs(slash_aliases) do
-  _G["SLASH_" .. NAME:upper() .. i] = "/" .. alias
+function T:InitializeCommands()
+  self:RegisterChatCommand(NAME:lower(), "ChatCommand")
 end
 
-SlashCmdList[NAME:upper()] = function(msg, _)
-  msg = trim(msg)
-  local args = split(msg)
+function T:ChatCommand(input)
+  input = trim(input) or ""
 
-  if #args < 1 then
-    return commands["help"]("")
+  local arg, next = self:GetArgs(input, 1)
+
+  if arg then
+    local pattern = "^" .. arg:lower()
+    local matches = {}
+    for k, _ in pairs(commands) do
+      if k:match(pattern) then matches[#matches + 1] = k end
+    end
+
+    if #matches == 0 then
+      return T:LogError('No command found that matches "%s"', arg)
+    end
+
+    if #matches == 1 then
+      local rest = input:sub(next)
+      return commands[matches[1]].handler(rest)
+    end
+
+    matches = table.concat(matches, ", ")
+    T:LogInfo('Multiple commands match "%s": %s', arg, matches)
+  else
+    commands["help"].handler("")
   end
-
-  local pattern = "^" .. args[1]
-  table.remove(args, 1)
-
-  local matches = {}
-  for k, _ in pairs(commands) do
-    if k:match(pattern) then matches[#matches + 1] = k end
-  end
-
-  if #matches == 0 then
-    return log:error('No command found that matches "%s"', args[1])
-  end
-
-  if #matches == 1 then
-    return commands[matches[1]](msg, unpack(args))
-  end
-
-  matches = table.concat(matches, ", ")
-  log:error('Multiple commands match "%s": %s', args[1], matches)
 end
+
+T:AddInitializer("InitializeCommands")

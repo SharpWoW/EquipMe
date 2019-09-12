@@ -8,8 +8,6 @@
 
 local _, T = ...
 
-local i18n = T.i18n
-
-local L = i18n:register("ptBR", "Português (Brasil)", "Portuguese (Brazil)")
+local L = T.I18n:Register("ptBR", "Português (Brasil)", "Portuguese (Brazil)")
 
 --@localization(locale="ptBR", format="lua_additive_table", handle-subnamespaces="concat", namespace-delimiter=".")@

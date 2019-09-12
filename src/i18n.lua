@@ -27,13 +27,13 @@ local i18n = {
 
 local locale_mt = {
   __index = function(locale, key)
-    return (locale:resolve(key))
+    return (locale:Resolve(key))
   end,
   __newindex = function(locale, key, value)
     locale.strings[key] = value
   end,
   __call = function(locale, key, ...)
-    local resolved = (locale:resolve(key))
+    local resolved = (locale:Resolve(key))
     if select("#", ...) < 1 then return resolved end
     return sprintf(resolved, ...)
   end,
@@ -42,7 +42,7 @@ local locale_mt = {
   end
 }
 
-function i18n:register(code, name, english_name, is_default)
+function i18n:Register(code, name, english_name, is_default)
   local locale = {}
 
   locale.code = code
@@ -52,7 +52,7 @@ function i18n:register(code, name, english_name, is_default)
   locale.strings = {}
 
   if is_default then
-    locale.resolve = function(tbl, key)
+    locale.Resolve = function(tbl, key)
       if tbl.strings[key] then
         return tbl.strings[key], true
       else
@@ -60,35 +60,35 @@ function i18n:register(code, name, english_name, is_default)
       end
     end
   else
-    locale.resolve = function(tbl, key)
+    locale.Resolve = function(tbl, key)
       if tbl.strings[key] then
         return tbl.strings[key], true
       else
-        return self:get_default()[key]
+        return self:GetDefault()[key]
       end
     end
   end
 
-  locale.has_key = function(tbl, key)
-    local _, found = tbl:resolve(key)
+  locale.HasKey = function(tbl, key)
+    local _, found = tbl:Resolve(key)
     return found
   end
 
-  locale.try_get = locale.resolve
+  locale.TryGet = locale.Resolve
 
   self.locales[code] = setmetatable(locale, locale_mt)
   return self.locales[code]
 end
 
-function i18n:register_alias(from, to)
+function i18n:RegisterAlias(from, to)
   self.aliases[from] = to
 end
 
-function i18n:has(code)
+function i18n:Has(code)
   return type(self.locales[code] ~= "nil")
 end
 
-function i18n:get_default_code()
+function i18n:GetDefaultCode()
   for code, locale in pairs(self.locales) do
     if locale.is_default then
       return code
@@ -98,27 +98,27 @@ function i18n:get_default_code()
   return FALLBACK_CODE
 end
 
-function i18n:get(code)
+function i18n:Get(code)
   if self.current then
     code = self.current
   elseif not code then
     code = GetLocale()
   end
 
-  code = code or self:get_default_code()
+  code = code or self:GetDefaultCode()
 
   return self.locales[self.aliases[code] or code]
 end
 
-function i18n:set(code)
+function i18n:Set(code)
   self.current = code
 end
 
-function i18n:get_default()
-  return self.locales[self:get_default_code()]
+function i18n:GetDefault()
+  return self.locales[self:GetDefaultCode()]
 end
 
-function i18n:get_codes()
+function i18n:GetCodes()
   local codes = {}
   for k, _ in pairs(self.locales) do
     codes[#codes + 1] = k
@@ -129,4 +129,4 @@ function i18n:get_codes()
   return codes
 end
 
-T.i18n = i18n
+T.I18n = i18n

@@ -8,9 +8,7 @@
 
 local _, T = ...
 
-local i18n = T.i18n
-
 -- Blizzard/CurseForge/WoWAce shows esMX as "Latin American Spanish" while the official name is Mexican Spanish
-local L = i18n:register("esMX", "Español (México)", "Spanish (Latin American Spanish)")
+local L = T.I18n:Register("esMX", "Español (México)", "Spanish (Latin American Spanish)")
 
 --@localization(locale="esMX", format="lua_additive_table", handle-subnamespaces="concat", namespace-delimiter=".")@

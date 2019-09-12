@@ -8,8 +8,6 @@
 
 local _, T = ...
 
-local i18n = T.i18n
-
-local L = i18n:register("koKO", "한국어 (한국)", "Korean (Korea)")
+local L = T.I18n:Register("koKO", "한국어 (한국)", "Korean (Korea)")
 
 --@localization(locale="koKO", format="lua_additive_table", handle-subnamespaces="concat", namespace-delimiter=".")@

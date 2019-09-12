@@ -1,6 +1,7 @@
 {
     "Lua.diagnostics.globals": [
         "CreateFrame",
+        "DEFAULT_CHAT_FRAME",
         "GameTooltip",
         "GetLocale",
         "IsControlKeyDown",

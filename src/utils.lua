@@ -34,6 +34,7 @@ local utils = {
 }
 
 function utils.trim(str)
+  if not str then return nil end
   return (str:gsub("^%s*(.-)%s*$", "%1"))
 end
 

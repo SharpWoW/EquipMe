@@ -8,8 +8,6 @@
 
 local _, T = ...
 
-local i18n = T.i18n
-
-local L = i18n:register("zhCN", "中文 (中华人民共和国)", "Chinese (Simplified)")
+local L = T.I18n:Register("zhCN", "中文 (中华人民共和国)", "Chinese (Simplified)")
 
 --@localization(locale="zhCN", format="lua_additive_table", handle-subnamespaces="concat", namespace-delimiter=".")@
