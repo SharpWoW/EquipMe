@@ -10,11 +10,10 @@ local NAME, T = ...
 
 local L = T.I18n:Get()
 
-local function make_translator(suffix)
-  return function(info)
-    local key = table.concat(info, '_'):upper()
-    T:LogDebug("Options key is %s", key)
-    return L[key .. suffix]
+local function translator(path)
+  return function()
+    local key = "OPTIONS_" .. path
+    return L[key]
   end
 end
 
@@ -22,17 +21,20 @@ local options = {
   name = NAME,
   type = "group",
   args = {
-    name = make_translator("_NAME"),
-    desc = make_translator("_DESC"),
     show = {
+      name = translator "SHOW_NAME",
+      desc = translator "SHOW_DESC",
       type = "execute",
       guiHidden = true,
       func = function() T:OpenOptions() end
     },
     general = {
+      name = translator "GENERAL_NAME",
       type = "group",
       args = {
         loglevel = {
+          name = translator "GENERAL_LOGLEVEL_NAME",
+          desc = translator "GENERAL_LOGLEVEL_DESC",
           type = "select",
           values = function() return T.logging.level_names end,
           get = function() return T.db.profile.logging.level end,
