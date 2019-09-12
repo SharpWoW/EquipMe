@@ -4,10 +4,10 @@ describe("i18n", function()
   setup(function()
     local loader = require "spec/loader"
     loader.load("i18n.lua")
-    i18n = _G.EquipMe.i18n
+    i18n = _G.EquipMe.I18n
 
-    local enUS = i18n:register("enUS", "English (US)", "English (US)", true)
-    local svSE = i18n:register("svSE", "Svenska (Sverige)", "Swedish (Sweden)")
+    local enUS = i18n:Register("enUS", "English (US)", "English (US)", true)
+    local svSE = i18n:Register("svSE", "Svenska (Sverige)", "Swedish (Sweden)")
 
     enUS["hello"] = "Hello"
     svSE["hello"] = "Hallå"
@@ -20,43 +20,43 @@ describe("i18n", function()
   end)
 
   it("gets the correct default locale", function()
-    assert.same("enUS", i18n:get().code)
+    assert.same("enUS", i18n:Get().code)
   end)
 
   it("gets the correct specific locale", function()
-    assert.same("svSE", i18n:get("svSE").code)
+    assert.same("svSE", i18n:Get("svSE").code)
   end)
 
   it("gets a defined string in default locale", function()
-    assert.same("Hello", i18n:get()["hello"])
+    assert.same("Hello", i18n:Get()["hello"])
   end)
 
   it("gets a defined string in non-default locale", function()
-    assert.same("Hallå", i18n:get("svSE")["hello"])
+    assert.same("Hallå", i18n:Get("svSE")["hello"])
   end)
 
   it("fallbacks to correct default locale", function()
-    assert.same("English fallback", i18n:get("svSE")["test_fallback"])
+    assert.same("English fallback", i18n:Get("svSE")["test_fallback"])
   end)
 
   it("formats a string when called", function()
-    assert.same("Hello, Foobar!", i18n:get()("greet", "Foobar"))
+    assert.same("Hello, Foobar!", i18n:Get()("greet", "Foobar"))
   end)
 
   it("formats a string in non-default locale when called", function()
-    assert.same("Hallå, Svensson!", i18n:get("svSE")("greet", "Svensson"))
+    assert.same("Hallå, Svensson!", i18n:Get("svSE")("greet", "Svensson"))
   end)
 
   it("formats a fallback string", function()
-    assert.same("Some cheese", i18n:get("svSE")("test_fallback_format", "cheese"))
+    assert.same("Some cheese", i18n:Get("svSE")("test_fallback_format", "cheese"))
   end)
 
   it("notifies about missing strings", function()
-    assert.same("MISSING STRING: does_not_exist", i18n:get()["does_not_exist"])
+    assert.same("MISSING STRING: does_not_exist", i18n:Get()["does_not_exist"])
   end)
 
   it("notifies about missing strings from non-default locale", function()
-    local l = i18n:get("svSE")
+    local l = i18n:Get("svSE")
     assert.same("MISSING STRING: does_not_exist", l["does_not_exist"])
   end)
 end)
