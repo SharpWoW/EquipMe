@@ -25,23 +25,26 @@ local i18n = {
   aliases = {}
 }
 
+local function transform_key(key)
+  if type(key) == "string" then return key:upper() end
+  return key
+end
+
 local locale_mt = {
   -- L["MY_STRING"]
   __index = function(locale, key)
-    if type(key) == "string" then key = key:upper() end
-    return (locale:Resolve(key))
+    return (locale:Resolve(transform_key(key)))
   end,
 
   -- L["MY_STRING"] = "My translation"
   __newindex = function(locale, key, value)
-    if type(key) == "string" then key = key:upper() end
-    locale.strings[key] = value
+    locale.strings[transform_key(key)] = value
   end,
 
   -- L("MY_STRING")
   -- L("MY_STRING", "format", "args")
   __call = function(locale, key, ...)
-    local resolved = (locale:Resolve(key))
+    local resolved = (locale:Resolve(transform_key(key)))
     if select("#", ...) < 1 then return resolved end
     return sprintf(resolved, ...)
   end,
@@ -62,14 +65,16 @@ function i18n:Register(code, name, english_name, is_default)
 
   if is_default then
     locale.Resolve = function(tbl, key)
+      key = transform_key(key)
       if tbl.strings[key] then
         return tbl.strings[key], true
       else
-        return "%" .. key .. "%", false
+        return "!!!" .. key .. "!!!", false
       end
     end
   else
     locale.Resolve = function(tbl, key)
+      key = transform_key(key)
       if tbl.strings[key] then
         return tbl.strings[key], true
       else
@@ -79,7 +84,7 @@ function i18n:Register(code, name, english_name, is_default)
   end
 
   locale.HasKey = function(tbl, key)
-    local _, found = tbl:Resolve(key)
+    local _, found = tbl:Resolve(transform_key(key))
     return found
   end
 

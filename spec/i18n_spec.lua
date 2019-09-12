@@ -52,11 +52,11 @@ describe("i18n", function()
   end)
 
   it("notifies about missing strings", function()
-    assert.same("MISSING STRING: does_not_exist", i18n:Get()["does_not_exist"])
+    assert.same("!!!DOES_NOT_EXIST!!!", i18n:Get()["does_not_exist"])
   end)
 
   it("notifies about missing strings from non-default locale", function()
     local l = i18n:Get("svSE")
-    assert.same("MISSING STRING: does_not_exist", l["does_not_exist"])
+    assert.same("!!!DOES_NOT_EXIST!!!", l["does_not_exist"])
   end)
 end)
