@@ -19,12 +19,13 @@ script:
   - /home/travis/.luarocks/bin/busted
 
 deploy:
-  skip_cleanup: true
   #- provider: script
   #  script: ./release.sh
   #- provider: script
   #  script: ./release.sh -s -p 0 -w 0
   - provider: script
     script: bash release.sh -g 1.13.2 -w 0
+    skip_cleanup: true
   - provider: script
     script: bash release.sh -s -g 1.13.2 -p 0 -w 0
+    skip_cleanup: true
