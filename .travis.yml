@@ -9,15 +9,21 @@ addons:
 install:
   - luarocks install --local luacheck
   - luarocks install --local busted
+  - curl -fsSLo release.sh https://raw.githubusercontent.com/BigWigsMods/packager/master/release.sh
+  - chmod +x release.sh
 
 before_script:
   - /home/travis/.luarocks/bin/luacheck . -q --codes --ranges
 
 script:
   - /home/travis/.luarocks/bin/busted
-  - curl -fsSLo release.sh https://raw.githubusercontent.com/BigWigsMods/packager/master/release.sh
-  - chmod +x release.sh
-  #- ./release.sh
-  #- ./release.sh -s -p 0 -w 0
-  - ./release.sh -g 1.13.2 -w 0
-  - ./release.sh -s -g 1.13.2 -p 0 -w 0
+
+deploy:
+  #- provider: script
+  #  script: ./release.sh
+  #- provider: script
+  #  script: ./release.sh -s -p 0 -w 0
+  - provider: script
+    script: bash release.sh -g 1.13.2 -w 0
+  - provider: script
+    script: ./release.sh -s -g 1.13.2 -p 0 -w 0
