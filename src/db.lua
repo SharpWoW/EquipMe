@@ -11,6 +11,11 @@ local NAME, T = ...
 local DB_NAME = NAME .. "DB"
 
 local defaults = {
+  global = {
+    i18n = {
+      code = GetLocale()
+    }
+  },
   profile = {
     logging = {
       level = T.logging.levels.INFO
@@ -23,5 +28,3 @@ function T:InitializeDb()
   self.db = LibStub("AceDB-3.0"):New(DB_NAME, defaults, true)
   self:LogDebug("DB initialized")
 end
-
-T:AddInitializer("InitializeDb")

@@ -36,5 +36,13 @@ L["OPTIONS_SHOW_DESC"] = "Opens the GUI interface for configuring"
 L["OPTIONS_GENERAL_NAME"] = "General options"
 L["OPTIONS_GENERAL_LOGLEVEL_NAME"] = "Log level"
 L["OPTIONS_GENERAL_LOGLEVEL_DESC"] = "Sets the minimum log level that will print"
+L["OPTIONS_I18N_NAME"] = "Localization"
+L["OPTIONS_I18N_DESC"] = "Configure settings related to localization"
+L["OPTIONS_I18N_LANGUAGE_NAME"] = "Language"
+L["OPTIONS_I18N_LANGUAGE_NAME"] = "Sets the language to be used. Changing this setting requires a UI reload to take full effect."
+L["OPTIONS_I18N_LANGUAGE_RELOAD"] = "The UI must be reloaded to apply language changes, do so now?"
+
+L["RELOAD_PROMPT"] = "The UI needs to be reloaded to apply changes, do so now?"
+L["RELOAD_UI"] = "Reload UI"
 
 i18n:RegisterAlias("enGB", "enUS")

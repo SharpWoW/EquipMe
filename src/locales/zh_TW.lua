@@ -10,4 +10,4 @@ local _, T = ...
 
 local L = T.I18n:Register("zhTW", "中文 (中華民國)", "Chinese (Traditional)")
 
---@localization(locale="zhTW", format="lua_additive_table", handle-subnamespaces="concat", namespace-delimiter=".")@
+--@localization(locale="zhTW", format="lua_additive_table", handle-subnamespaces="concat")@

@@ -11,7 +11,7 @@ local NAME, T = ...
 local colorize = T.utils.colorize
 local trim = T.utils.trim
 
-local L = T.I18n:Get()
+local L = T.I18n
 
 local commands = {}
 
@@ -84,5 +84,3 @@ function T:ChatCommand(input)
     commands["help"].handler("")
   end
 end
-
-T:AddInitializer("InitializeCommands")

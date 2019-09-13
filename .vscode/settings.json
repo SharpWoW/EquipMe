@@ -1,16 +1,20 @@
 {
-    "Lua.diagnostics.globals": [
-        "CreateFrame",
-        "DEFAULT_CHAT_FRAME",
-        "GameTooltip",
-        "GetLocale",
-        "IsControlKeyDown",
-        "IsShiftKeyDown",
-        "LibStub",
-        "SlashCmdList",
-        "describe",
-        "setup",
-        "it"
-    ],
-    "Lua.runtime.version": "Lua 5.1"
+  "Lua.diagnostics.globals": [
+    "C_UI",
+    "CANCEL",
+    "CreateFrame",
+    "DEFAULT_CHAT_FRAME",
+    "GameTooltip",
+    "GetLocale",
+    "IsControlKeyDown",
+    "IsShiftKeyDown",
+    "LibStub",
+    "SlashCmdList",
+    "StaticPopup_Show",
+    "StaticPopupDialogs",
+    "describe",
+    "setup",
+    "it"
+  ],
+  "Lua.runtime.version": "Lua 5.1"
 }

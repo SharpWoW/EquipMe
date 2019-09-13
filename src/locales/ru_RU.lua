@@ -10,4 +10,4 @@ local _, T = ...
 
 local L = T.I18n:Register("ruRU", "русский (Россия)", "Russian (Russia)")
 
---@localization(locale="ruRU", format="lua_additive_table", handle-subnamespaces="concat", namespace-delimiter=".")@
+--@localization(locale="ruRU", format="lua_additive_table", handle-subnamespaces="concat")@

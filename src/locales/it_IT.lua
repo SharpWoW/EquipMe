@@ -10,4 +10,4 @@ local _, T = ...
 
 local L = T.I18n:Register("itIT", "Italiano (Italia)", "Italian (Italy)")
 
---@localization(locale="itIT", format="lua_additive_table", handle-subnamespaces="concat", namespace-delimiter=".")@
+--@localization(locale="itIT", format="lua_additive_table", handle-subnamespaces="concat")@

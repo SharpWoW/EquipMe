@@ -8,4 +8,4 @@
 
 local _, T = ...
 
-local L = T.I18n:Get()
+local L = T.I18n

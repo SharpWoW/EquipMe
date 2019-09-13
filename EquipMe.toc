@@ -56,5 +56,6 @@ src\db.lua
 src\options.lua
 src\commands.lua
 src\events.lua
+src\gui.lua
 src\broker.lua
 src\equipment_manager.lua

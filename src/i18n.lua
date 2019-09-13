@@ -25,6 +25,15 @@ local i18n = {
   aliases = {}
 }
 
+local i18n_mt = {
+  __index = function(tbl, key)
+    return tbl:Get()[key]
+  end,
+  __call = function(tbl, ...)
+    return tbl:Get()(...)
+  end
+}
+
 local function transform_key(key)
   if type(key) == "string" then return key:upper() end
   return key
@@ -53,6 +62,10 @@ local locale_mt = {
   -- print(L)
   __tostring = function(locale) return locale.code end
 }
+
+function i18n:Initialize()
+  self.current = T.db.global.i18n.code
+end
 
 function i18n:Register(code, name, english_name, is_default)
   local locale = {}
@@ -126,6 +139,7 @@ end
 
 function i18n:Set(code)
   self.current = code
+  T.db.global.i18n.code = code
 end
 
 function i18n:GetDefault()
@@ -142,12 +156,6 @@ function i18n:GetCodes()
   end
   return codes
 end
-
-local i18n_mt = {
-  __call = function(tbl, ...)
-    return tbl:Get()(...)
-  end
-}
 
 setmetatable(i18n, i18n_mt)
 

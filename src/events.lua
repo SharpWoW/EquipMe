@@ -32,5 +32,3 @@ function T:InitializeEvents()
   log_register_event(self, "PLAYER_REGEN_ENABLED")
   self:LogDebug("Events initialized!")
 end
-
-T:AddInitializer("InitializeEvents")

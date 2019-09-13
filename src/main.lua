@@ -8,11 +8,9 @@
 
 local NAME, T = ...
 
-local L = T.I18n:Get()
+local L = T.I18n
 
 _G[NAME] = T
-
-T.initializers = {}
 
 local embeds = {
   "AceConsole-3.0",
@@ -24,22 +22,12 @@ LibStub("AceAddon-3.0"):NewAddon(T, NAME, unpack(embeds))
 function T:OnInitialize()
   self:LogDebug("Initializing...")
 
-  for _, initializer in pairs(self.initializers) do
-    local init_type = type(initializer)
-    if init_type == "string" then
-      if self[initializer] then
-        self:LogDebug('Calling initializer "%s"...', initializer)
-        self[initializer](self)
-        self:LogDebug('Initializer "%s" called!', initializer)
-      else
-        self:LogError(L"INITIALIZER_NOT_FOUND", initializer)
-      end
-    elseif init_type == "function" then
-      initializer(self)
-    else
-      self:LogError(L"UNSUPPORTED_INITIALIZER_TYPE", init_type)
-    end
-  end
+  self:InitializeDb()
+  L:Initialize()
+  self:InitializeOptions()
+  self:InitializeEvents()
+  self:InitializeCommands()
+  self:InitializeBroker()
 
   self:LogDebug("Initialized!")
 end
@@ -50,8 +38,4 @@ end
 
 function T:OnDisable()
   self:LogInfo(L"ADDON_DISABLED")
-end
-
-function T:AddInitializer(initializer)
-  self.initializers[#self.initializers + 1] = initializer
 end

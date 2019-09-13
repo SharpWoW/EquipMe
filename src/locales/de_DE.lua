@@ -10,4 +10,4 @@ local _, T = ...
 
 local L = T.I18n:Register("deDE", "Deutsch (Deutschland)", "German (Germany)")
 
---@localization(locale="deDE", format="lua_additive_table", handle-subnamespaces="concat", namespace-delimiter=".")@
+--@localization(locale="deDE", format="lua_additive_table", handle-subnamespaces="concat")@

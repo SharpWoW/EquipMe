@@ -8,7 +8,7 @@
 
 local NAME, T = ...
 
-local L = T.I18n:Get()
+local L = T.I18n
 
 local function translator(path)
   return function()
@@ -17,43 +17,69 @@ local function translator(path)
   end
 end
 
-local options = {
-  name = NAME,
-  type = "group",
-  args = {
-    show = {
-      name = translator "SHOW_NAME",
-      desc = translator "SHOW_DESC",
-      type = "execute",
-      guiHidden = true,
-      func = function() T:OpenOptions() end
-    },
-    general = {
-      name = translator "GENERAL_NAME",
-      type = "group",
-      args = {
-        loglevel = {
-          name = translator "GENERAL_LOGLEVEL_NAME",
-          desc = translator "GENERAL_LOGLEVEL_DESC",
-          type = "select",
-          values = function() return T.logging.level_names end,
-          get = function() return T.db.profile.logging.level end,
-          set = function(_, value)
-            T.db.profile.logging.level = value
-          end,
-          style = "dropdown"
-        }
-      }
-    }
-  }
-}
-
 local acd
 
 function T:InitializeOptions()
   self:LogDebug("Initializing options...")
 
-  options.args.profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db)
+  local options = {
+    name = NAME,
+    type = "group",
+    args = {
+      show = {
+        name = translator "SHOW_NAME",
+        desc = translator "SHOW_DESC",
+        type = "execute",
+        guiHidden = true,
+        func = function() T:OpenOptions() end
+      },
+      general = {
+        name = translator "GENERAL_NAME",
+        type = "group",
+        args = {
+          loglevel = {
+            name = translator "GENERAL_LOGLEVEL_NAME",
+            desc = translator "GENERAL_LOGLEVEL_DESC",
+            type = "select",
+            values = function() return T.logging.level_names end,
+            get = function() return T.db.profile.logging.level end,
+            set = function(_, value)
+              T.db.profile.logging.level = value
+            end,
+            style = "dropdown"
+          }
+        }
+      },
+      i18n = {
+        name = translator "I18N_NAME",
+        desc = translator "I18N_DESC",
+        type = "group",
+        args = {
+          language = {
+            name = translator "I18N_LANGUAGE_NAME",
+            desc = translator "I18N_LANGUAGE_DESC",
+            type = "select",
+            values = function()
+              local codes = L:GetCodes()
+              local result = {}
+              for _, code in pairs(codes) do
+                local name = L:Get(code).name
+                result[name] = code
+              end
+              return result
+            end,
+            get = function() return L.current end,
+            set = function(_, value)
+              L:Set(value)
+              T.gui:ShowReloadDialog(L"OPTIONS_I18N_LANGUAGE_RELOAD")
+            end,
+            style = "dropdown"
+          }
+        }
+      },
+      profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db)
+    }
+  }
 
   LibStub("AceConfig-3.0"):RegisterOptionsTable(NAME, options)
   acd = LibStub("AceConfigDialog-3.0")
@@ -68,5 +94,3 @@ function T:OpenOptions()
   self:LogDebug("Opening options")
   acd:Open(NAME)
 end
-
-T:AddInitializer("InitializeOptions")

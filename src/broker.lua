@@ -36,5 +36,3 @@ function broker:SetMinimap(enabled)
 end
 
 T.broker = broker
-
-T:AddInitializer("InitializeBroker")
