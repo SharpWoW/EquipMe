@@ -16,5 +16,7 @@
     "setup",
     "it"
   ],
-  "Lua.runtime.version": "Lua 5.1"
+  "Lua.runtime.version": "Lua 5.1",
+  "lua.preferLuaCheckErrors": true,
+  "lua.targetVersion": "5.1"
 }
