@@ -49,5 +49,6 @@ files = {
 
 exclude_files = {
   "lib/LibDataBroker-1-1",
-  "extern"
+  "extern",
+  "out"
 }
