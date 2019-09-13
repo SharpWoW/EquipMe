@@ -580,3 +580,6 @@ MigrationBackup/
 
 # Ignore external libraries (pulled in with packager)
 /extern
+
+# Ignore compiled files
+/out
