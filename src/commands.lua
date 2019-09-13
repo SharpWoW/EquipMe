@@ -70,7 +70,7 @@ function T:ChatCommand(input)
     end
 
     if #matches == 0 then
-      return T:LogError(L"COMMAND_NOT_FOUND", arg)
+      return T:LogError(L { "COMMAND_NOT_FOUND", arg = arg })
     end
 
     if #matches == 1 then
@@ -79,7 +79,7 @@ function T:ChatCommand(input)
     end
 
     matches = table.concat(matches, ", ")
-    T:LogInfo(L"MULTIPLE_COMMANDS_FOUND", arg, matches)
+    T:LogInfo(L { "MULTIPLE_COMMANDS_FOUND", arg = arg, matches = matches })
   else
     commands["help"].handler("")
   end

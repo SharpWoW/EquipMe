@@ -6,6 +6,4 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 ]]
 
-local _, T = ...
-
-local L = T.I18n
+local _, _ = ...

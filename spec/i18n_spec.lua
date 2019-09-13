@@ -1,8 +1,17 @@
+--[[
+  Copyright © 2019 by Adam Hellberg.
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+]]
+
 describe("i18n", function()
   local i18n
 
   setup(function()
     local loader = require "spec/loader"
+    loader.load("utils.lua")
     loader.load("i18n.lua")
     i18n = _G.EquipMe.I18n
 
@@ -12,11 +21,11 @@ describe("i18n", function()
     enUS["hello"] = "Hello"
     svSE["hello"] = "Hallå"
 
-    enUS["greet"] = "Hello, %s!"
-    svSE["greet"] = "Hallå, %s!"
+    enUS["greet"] = "Hello, %(name)s!"
+    svSE["greet"] = "Hallå, %(name)s!"
 
     enUS["test_fallback"] = "English fallback"
-    enUS["test_fallback_format"] = "Some %s"
+    enUS["test_fallback_format"] = "Some %(thing)s"
   end)
 
   it("gets the correct default locale", function()
@@ -40,15 +49,15 @@ describe("i18n", function()
   end)
 
   it("formats a string when called", function()
-    assert.same("Hello, Foobar!", i18n:Get()("greet", "Foobar"))
+    assert.same("Hello, Foobar!", i18n:Get()("greet", { name = "Foobar" }))
   end)
 
   it("formats a string in non-default locale when called", function()
-    assert.same("Hallå, Svensson!", i18n:Get("svSE")("greet", "Svensson"))
+    assert.same("Hallå, Svensson!", i18n:Get("svSE")("greet", { name = "Svensson" }))
   end)
 
   it("formats a fallback string", function()
-    assert.same("Some cheese", i18n:Get("svSE")("test_fallback_format", "cheese"))
+    assert.same("Some cheese", i18n:Get("svSE")("test_fallback_format", { thing = "cheese" }))
   end)
 
   it("notifies about missing strings", function()
@@ -58,5 +67,21 @@ describe("i18n", function()
   it("notifies about missing strings from non-default locale", function()
     local l = i18n:Get("svSE")
     assert.same("!!!DOES_NOT_EXIST!!!", l["does_not_exist"])
+  end)
+
+  it("can get strings via i18n __index", function()
+    assert.same("Hello", i18n["hello"])
+  end)
+
+  it("can get strings via i18n __call", function()
+    assert.same("Hello", i18n("hello"))
+  end)
+
+  it("can format strings via i18n __call", function()
+    assert.same("Hello, Foobar!", i18n("greet", { name = "Foobar" }))
+  end)
+
+  it("can format if supplied only a table", function()
+    assert.same("Hello, Foobar!", i18n({ "greet", name = "Foobar" }))
   end)
 end)

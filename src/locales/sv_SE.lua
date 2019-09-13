@@ -15,12 +15,9 @@ local L = T.I18n:Register("svSE", "Svenska (Sverige)", "Swedish (Sweden)")
 L["ADDON_ENABLED"] = "Aktiverad!"
 L["ADDON_DISABLED"] = "Avaktiverad!"
 
-L["INITIALIZER_NOT_FOUND"] = 'Initierare "%s" hittades inte'
-L["UNSUPPORTED_INITIALIZER_TYPE"] = 'Initierarens typ stöds inte: "%s"'
-
 L["AVAILABLE_COMMANDS"] = "Följande kommandon är tillgängliga:"
-L["COMMAND_NOT_FOUND"] = 'Hittade inget kommando som matchar "%s"'
-L["MULTIPLE_COMMANDS_FOUND"] = 'Flera kommandon matchar "%s": %s'
+L["COMMAND_NOT_FOUND"] = "Hittade inget kommando som matchar %(arg)q"
+L["MULTIPLE_COMMANDS_FOUND"] = "Flera kommandon matchar %(arg)q: %(matches)s"
 L["COMMANDS_HELP_HELP"] = "Visar det här hjälpmeddelandet"
 L["COMMANDS_OPTIONS_HELP"] = "Konfigurera tillägg"
 L["COMMANDS_TESTLOG_HELP"] = "Testar loggsystemet"

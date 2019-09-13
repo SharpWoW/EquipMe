@@ -12,9 +12,8 @@ local FALLBACK_CODE = "enUS"
 
 -- Create upvalues in case locale code is called from performance-critical
 -- code.
-local select = select
 local GetLocale = GetLocale
-local sprintf = string.format
+local interpolate = T.utils.interpolate
 local setmetatable = setmetatable
 local type = type
 local pairs = pairs
@@ -51,11 +50,17 @@ local locale_mt = {
   end,
 
   -- L("MY_STRING")
-  -- L("MY_STRING", "format", "args")
-  __call = function(locale, key, ...)
+  -- L("MY_STRING", { key = "format", foo = "args" })
+  -- L { "MY_STRING", key = "format, foo = "args" }
+  __call = function(locale, key, args)
+    if type(key) == "table" then
+      args = key
+      key = args[1]
+    end
+
     local resolved = (locale:Resolve(transform_key(key)))
-    if select("#", ...) < 1 then return resolved end
-    return sprintf(resolved, ...)
+    if not args then return resolved end
+    return interpolate(resolved, args)
   end,
 
   -- tostring(L)
@@ -126,8 +131,11 @@ function i18n:GetDefaultCode()
 end
 
 function i18n:Get(code)
-  if self.current then
-    code = self.current
+  -- Avoid infinite recursion by the __index metaevent if `current` has not
+  -- been initialized yet.
+  local current = rawget(self, "current")
+  if current then
+    code = current
   elseif not code then
     code = GetLocale()
   end
@@ -146,13 +154,15 @@ function i18n:GetDefault()
   return self.locales[self:GetDefaultCode()]
 end
 
-function i18n:GetCodes()
+function i18n:GetCodes(include_aliases)
   local codes = {}
   for k, _ in pairs(self.locales) do
     codes[#codes + 1] = k
   end
-  for k, _ in pairs(self.aliases) do
-    codes[#codes + 1] = k
+  if include_aliases then
+    for k, _ in pairs(self.aliases) do
+      codes[#codes + 1] = k
+    end
   end
   return codes
 end

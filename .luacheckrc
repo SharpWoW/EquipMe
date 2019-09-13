@@ -2,16 +2,20 @@ stds.wow = {
   globals = {
     SlashCmdList = {
       other_fields = true
-    }
+    },
+    "StaticPopupDialogs"
   },
   read_globals = {
+    "C_UI",
+    "CANCEL",
     "CreateFrame",
     "DEFAULT_CHAT_FRAME",
     "GameTooltip",
     "GetLocale",
     "IsControlKeyDown",
     "IsShiftKeyDown",
-    "SlashCmdList"
+    "SlashCmdList",
+    "StaticPopup_Show"
   }
 }
 
@@ -32,7 +36,8 @@ files = {
   },
   ["src/locales/*.lua"] = {
     ignore = {
-      "211/L"
+      "211/L",
+      "631"
     }
   },
   ["src/logging.lua"] = {

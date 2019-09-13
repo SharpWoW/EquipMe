@@ -11,7 +11,7 @@ local utils = T.utils
 local colorize = utils.colorize
 
 local select = select
-local sprintf = string.format
+local sformat = string.format
 
 local NAME_COLOR = utils.colors.AQUA
 
@@ -53,23 +53,23 @@ local levels = logging.levels
 local lcolors = COLORS.LEVELS
 
 local FORMATS = {
-  [levels.TRACE] = sprintf(
+  [levels.TRACE] = sformat(
     "%s%s%s %%s",
     left_brace,
     colorize("TRACE", lcolors[levels.TRACE]),
     right_brace),
-  [levels.DEBUG] = sprintf(
+  [levels.DEBUG] = sformat(
     "%s%s%s %%s",
     left_brace,
     colorize("DEBUG", lcolors[levels.DEBUG]),
     right_brace),
   [levels.INFO] = "%s",
-  [levels.WARN] = sprintf(
+  [levels.WARN] = sformat(
     "%s%s%s %%s",
     left_brace,
     colorize("WARN", lcolors[levels.WARN]),
     right_brace),
-  [levels.ERROR] = sprintf(
+  [levels.ERROR] = sformat(
     "%s%s%s %%s",
     left_brace,
     colorize("ERROR", lcolors[levels.ERROR]),
@@ -78,7 +78,7 @@ local FORMATS = {
 
 local function format(message, ...)
   if select("#", ...) < 1 then return message end
-  return sprintf(message, ...)
+  return sformat(message, ...)
 end
 
 function T:GetLogLevel()

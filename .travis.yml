@@ -7,6 +7,7 @@ addons:
     - luarocks
 
 install:
+  - luarocks install --local moonscript
   - luarocks install --local luacheck
   - luarocks install --local busted
   - curl -fsSLo release.sh https://raw.githubusercontent.com/BigWigsMods/packager/master/release.sh

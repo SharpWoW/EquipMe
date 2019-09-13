@@ -8,7 +8,8 @@
 
 local _, T = ...
 
-local sprintf = string.format
+local lua_sformat = string.format
+local lua_gsub = string.gsub
 local type = type
 
 local utils = {
@@ -33,6 +34,31 @@ local utils = {
   }
 }
 
+function utils.map(tbl, func)
+  local result = {}
+  for k, v in pairs(tbl) do
+    result[k] = func(v)
+  end
+  return result
+end
+
+local INTERP_PATTERN = "%%%((%a%w*)%)([-0-9%.]*[cdeEfgGiouxXsq])"
+function utils.interpolate(str, data)
+  if not data then
+    data = str
+    str = data[1]
+  end
+
+  local replacer = function(k, fmt)
+    if data[k] then
+      return lua_sformat("%" .. fmt, data[k])
+    end
+    return "%(" .. k .. ")" .. fmt
+  end
+
+  return (lua_gsub(str, INTERP_PATTERN, replacer))
+end
+
 function utils.trim(str)
   if not str then return nil end
   return (str:gsub("^%s*(.-)%s*$", "%1"))
@@ -46,11 +72,17 @@ function utils.split(str)
   return result
 end
 
-function utils.colorize(str, color)
-  if type(color) ~= "string" then return str end
+local function resolve_color(color)
+  if type(color) ~= "string" then return nil end
   color = color:upper()
   color = utils.colors[color] or color
-  return sprintf("|cff%s%s|r", color, tostring(str))
+  return color
+end
+
+function utils.colorize(str, color)
+  color = resolve_color(color)
+  if not color then return str end
+  return lua_sformat("|cff%s%s|r", color, tostring(str))
 end
 
 T.utils = utils

@@ -15,12 +15,9 @@ local L = i18n:Register("enUS", "English (US)", "English (US)", true)
 L["ADDON_ENABLED"] = "Enabled!"
 L["ADDON_DISABLED"] = "Disabled!"
 
-L["INITIALIZER_NOT_FOUND"] = 'Initializer "%s" was not found'
-L["UNSUPPORTED_INITIALIZER_TYPE"] = 'Unsupported initializer type: "%s"'
-
 L["AVAILABLE_COMMANDS"] = "The following commands are available:"
-L["COMMAND_NOT_FOUND"] = 'No command found that matches "%s"'
-L["MULTIPLE_COMMANDS_FOUND"] = 'Multiple commands match "%s": %s'
+L["COMMAND_NOT_FOUND"] = "No command found that matches %(arg)q"
+L["MULTIPLE_COMMANDS_FOUND"] = "Multiple commands match %(arg)s: %(matches)s"
 L["COMMANDS_HELP_HELP"] = "Shows this help message"
 L["COMMANDS_OPTIONS_HELP"] = "Configure AddOn"
 L["COMMANDS_TESTLOG_HELP"] = "Tests the log system"
