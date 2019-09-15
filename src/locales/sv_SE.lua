@@ -38,6 +38,7 @@ L["OPTIONS_I18N_DESC"] = "Konfigurera inställningar relaterat till lokalisering
 L["OPTIONS_I18N_LANGUAGE_NAME"] = "Språk"
 L["OPTIONS_I18N_LANGUAGE_DESC"] = "Ändra det språk som visas. För att slutföra ändring av språk krävs en omladdning av gränssnittet."
 L["OPTIONS_I18N_LANGUAGE_RELOAD"] = "Gränssnittet måste laddas om för att slutföra språkändringar, gör detta nu?"
+L["OPTIONS_PROFILES_NAME"] = "Profiler"
 
 L["RELOAD_PROMPT"] = "Gränssnittet måste laddas om för att applicera ändringar, gör detta nu?"
 L["RELOAD_UI"] = "Ladda om UI"

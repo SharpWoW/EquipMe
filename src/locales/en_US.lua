@@ -38,6 +38,7 @@ L["OPTIONS_I18N_DESC"] = "Configure settings related to localization"
 L["OPTIONS_I18N_LANGUAGE_NAME"] = "Language"
 L["OPTIONS_I18N_LANGUAGE_DESC"] = "Sets the language to be used. Changing this setting requires a UI reload to take full effect."
 L["OPTIONS_I18N_LANGUAGE_RELOAD"] = "The UI must be reloaded to apply language changes, do so now?"
+L["OPTIONS_PROFILES_NAME"] = "Profiles"
 
 L["RELOAD_PROMPT"] = "The UI needs to be reloaded to apply changes, do so now?"
 L["RELOAD_UI"] = "Reload UI"

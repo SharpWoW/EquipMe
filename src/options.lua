@@ -83,10 +83,12 @@ function T:InitializeOptions()
     }
   }
 
-  LibStub("AceConfig-3.0"):RegisterOptionsTable(NAME, options)
+  local ac = LibStub("AceConfig-3.0")
+  ac:RegisterOptionsTable(NAME, options)
   acd = LibStub("AceConfigDialog-3.0")
   acd:AddToBlizOptions(NAME, NAME, nil, "general")
-  acd:AddToBlizOptions(NAME, "Profiles", NAME, "profiles")
+  acd:AddToBlizOptions(NAME, L"OPTIONS_I18N_NAME", NAME, "i18n")
+  acd:AddToBlizOptions(NAME, L"OPTIONS_PROFILES_NAME", NAME, "profiles")
 
   self:LogDebug("Options initialized!")
 end
