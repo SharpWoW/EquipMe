@@ -17,6 +17,7 @@ local defaults = {
     }
   },
   profile = {
+    sets = {},
     logging = {
       level = T.logging.levels.INFO
     }

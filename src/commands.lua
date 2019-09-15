@@ -51,6 +51,39 @@ register("testlog", function()
   T:LogError(L"TEST_ERROR")
 end, L"COMMANDS_TESTLOG_HELP")
 
+register("save", function(self, input)
+  local name = self:GetArgs(input, 1)
+
+  if not name then
+    self:LogError(L"COMMANDS_SAVE_MISSING_NAME")
+    return
+  end
+
+  self.inventory:Save(name)
+end, L"COMMANDS_SAVE_HELP")
+
+register("load", function(self, input)
+  local name = self:GetArgs(input, 1)
+
+  if not name then
+    self:LogError(L"COMMANDS_LOAD_MISSING_NAME")
+    return
+  end
+
+  self.inventory:Load(name)
+end, L"COMMANDS_LOAD_HELP")
+
+register("delete", function(self, input)
+  local name = self:GetArgs(input, 1)
+
+  if not name then
+    self:LogError(L"COMMANDS_DELETE_MISSING_NAME")
+    return
+  end
+
+  self.inventory:Delete(name)
+end, L"COMMANDS_DELETE_HELP")
+
 function T:InitializeCommands()
   self:LogDebug("Initializing commands...")
   self:RegisterChatCommand(NAME:lower(), "ChatCommand")

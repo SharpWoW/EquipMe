@@ -61,4 +61,5 @@ src\combat_queue.lua
 src\events.lua
 src\gui.lua
 src\broker.lua
-src\equipment_manager.lua
+src\items.lua
+src\inventory.lua
