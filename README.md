@@ -52,6 +52,11 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 See the file [LICENSE][] for more details.
 
+## External links
+
+ * [WowAce][]
+ * [CurseForge][]
+
 [mpl]: https://mozilla.org/MPL/2.0/
 [mpl-osi]: https://opensource.org/licenses/MPL-2.0
 [mpl-badge]: https://img.shields.io/badge/license-MPL%202.0-blue.svg
@@ -68,3 +73,6 @@ See the file [LICENSE][] for more details.
 
 [travis-master-status]: https://travis-ci.com/SharpWoW/EquipMe
 [travis-master-badge]: https://travis-ci.com/SharpWoW/EquipMe.svg?branch=master
+
+[wowace]: https://www.wowace.com/projects/equipme
+[curseforge]: https://www.curseforge.com/wow/addons/equipme
