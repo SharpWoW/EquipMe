@@ -59,10 +59,7 @@ function utils.interpolate(str, data)
   return (lua_gsub(str, INTERP_PATTERN, replacer))
 end
 
-function utils.trim(str)
-  if not str then return nil end
-  return (str:gsub("^%s*(.-)%s*$", "%1"))
-end
+utils.trim = strtrim
 
 function utils.split(str)
   local result = {}

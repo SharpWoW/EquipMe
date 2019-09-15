@@ -13,6 +13,11 @@ _G.EquipMe_NAME = "EquipMe"
 
 _G.GetLocale = function() return "enUS" end
 
+_G.strtrim = function(str)
+  if not str then return nil end
+  return (str:gsub("^%s*(.-)%s*$", "%1"))
+end
+
 function loader.load(file)
   return assert(loadfile("src/" .. file))(_G.EquipMe_NAME, _G.EquipMe)
 end
