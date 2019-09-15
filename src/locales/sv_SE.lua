@@ -40,4 +40,4 @@ L["OPTIONS_I18N_LANGUAGE_DESC"] = "Ändra det språk som visas. För att slutfö
 L["OPTIONS_I18N_LANGUAGE_RELOAD"] = "Gränssnittet måste laddas om för att slutföra språkändringar, gör detta nu?"
 
 L["RELOAD_PROMPT"] = "Gränssnittet måste laddas om för att applicera ändringar, gör detta nu?"
-L["RELOAD_UI"] = "Ladda om gränssnitt"
+L["RELOAD_UI"] = "Ladda om UI"
