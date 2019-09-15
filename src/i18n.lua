@@ -130,17 +130,19 @@ function i18n:GetDefaultCode()
   return FALLBACK_CODE
 end
 
+function i18n:GetCurrentCode()
+  return self:Get().code
+end
+
 function i18n:Get(code)
-  -- Avoid infinite recursion by the __index metaevent if `current` has not
-  -- been initialized yet.
-  local current = rawget(self, "current")
-  if current then
-    code = current
-  elseif not code then
-    code = GetLocale()
+  if not code then
+    -- Avoid infinite recursion by the __index metaevent if `current` has not
+    -- been initialized yet.
+    local current = rawget(self, "current")
+    code = current or GetLocale()
   end
 
-  code = code or self:GetDefaultCode()
+  if not self.locales[code] then code = self:GetDefaultCode() end
 
   return self.locales[self.aliases[code] or code]
 end

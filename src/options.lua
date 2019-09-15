@@ -64,11 +64,13 @@ function T:InitializeOptions()
               local result = {}
               for _, code in pairs(codes) do
                 local name = L:Get(code).name
-                result[name] = code
+                result[code] = name
               end
               return result
             end,
-            get = function() return L.current end,
+            get = function()
+              return L:GetCurrentCode()
+            end,
             set = function(_, value)
               L:Set(value)
               T.gui:ShowReloadDialog(L"OPTIONS_I18N_LANGUAGE_RELOAD")
