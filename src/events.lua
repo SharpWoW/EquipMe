@@ -8,16 +8,21 @@
 
 local _, T = ...
 
+local combat_queue = T.combat_queue
+
 function T:PLAYER_ENTERING_WORLD()
   self:LogTrace("PLAYER_ENTERING_WORLD")
 end
 
 function T:PLAYER_REGEN_DISABLED()
   self:LogTrace("PLAYER_REGEN_DISABLED")
+  self.is_in_combat = true
 end
 
 function T:PLAYER_REGEN_ENABLED()
   self:LogTrace("PLAYER_REGEN_ENABLED")
+  self.is_in_combat = false
+  combat_queue:Process()
 end
 
 local function log_register_event(addon, event)

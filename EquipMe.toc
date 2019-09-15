@@ -57,6 +57,7 @@ src\logging.lua
 src\db.lua
 src\options.lua
 src\commands.lua
+src\combat_queue.lua
 src\events.lua
 src\gui.lua
 src\broker.lua
