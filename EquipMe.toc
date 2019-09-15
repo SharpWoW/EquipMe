@@ -34,6 +34,8 @@ extern\AceGUI-3.0\AceGUI-3.0.xml
 extern\AceGUI-3.0-SharedMediaWidgets\widget.xml
 #@end-no-lib-strip@
 
+src\utils.lua
+
 # Localization\Internationalization
 src\i18n.lua
 src\locales\en_US.lua
@@ -47,9 +49,9 @@ src\locales\pt_BR.lua
 src\locales\ru_RU.lua
 src\locales\zh_CN.lua
 src\locales\zh_TW.lua
+src\locales\sv_SE.lua
 
 # Core components
-src\utils.lua
 src\main.lua
 src\logging.lua
 src\db.lua
