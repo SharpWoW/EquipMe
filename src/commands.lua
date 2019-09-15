@@ -39,7 +39,7 @@ register("help", function()
   end
 end, L"COMMANDS_HELP_HELP")
 
-register("options", function(input)
+register("options", function(_, input)
   LibStub("AceConfigCmd-3.0").HandleCommand(T, NAME:lower() .. " options", NAME, input)
 end, L"COMMANDS_OPTIONS_HELP")
 
@@ -75,12 +75,12 @@ function T:ChatCommand(input)
 
     if #matches == 1 then
       local rest = input:sub(next)
-      return commands[matches[1]].handler(rest)
+      return commands[matches[1]].handler(self, rest)
     end
 
     matches = table.concat(matches, ", ")
     T:LogInfo(L { "MULTIPLE_COMMANDS_FOUND", arg = arg, matches = matches })
   else
-    commands["help"].handler("")
+    commands["help"].handler(self, "")
   end
 end
