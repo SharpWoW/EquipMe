@@ -76,7 +76,15 @@ files = {
   }
 }
 
+include_files = {
+  "src",
+  "lib",
+  "spec",
+  "out"
+}
+
 exclude_files = {
+  "**/*.moon",
   "lib/LibDataBroker-1-1",
   "extern"
 }
