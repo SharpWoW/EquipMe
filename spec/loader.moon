@@ -11,7 +11,7 @@ export GetLocale = -> "enUS"
 
 export strtrim = (str using nil) ->
   if not str then return nil
-  (str:gsub("^%s*(.-)%s*$", "%1"))
+  (str\gsub("^%s*(.-)%s*$", "%1"))
 
 export strsplit = (str using nil) ->
   [token for token in string.gmatch str, "%S+"]
