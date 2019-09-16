@@ -55,20 +55,20 @@ stds.externs = {
 
 std = "lua51+wow+externs"
 max_line_length = 120
+codes = true
+
+ignore = {
+  "212/self"
+}
 
 files = {
-  ["src/**.lua"] = {
-    ignore = {
-      "212"
-    }
-  },
-  ["src/locales/*.lua"] = {
+  ["*/locales/*.lua"] = {
     ignore = {
       "211/L",
       "631"
     }
   },
-  ["src/logging.lua"] = {
+  ["*/logging.lua"] = {
     ignore = {
       "311/DEFAULT_THRESHOLD"
     }
@@ -77,6 +77,5 @@ files = {
 
 exclude_files = {
   "lib/LibDataBroker-1-1",
-  "extern",
-  "out"
+  "extern"
 }
