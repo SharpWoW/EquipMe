@@ -15,7 +15,7 @@ cache:
     - $HOME/.cache/pip
 
 before_install:
-  - pip install --user hererocks
+  - pip install hererocks
   - hererocks here -r^ --$LUA
   - source here/bin/activate
 
