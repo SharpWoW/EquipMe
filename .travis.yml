@@ -11,13 +11,13 @@ addons:
 
 cache:
   directories:
-    - here
+    - $HOME/here
     - $HOME/.cache/pip
 
 before_install:
   - pip install hererocks
-  - hererocks here -r^ --$LUA
-  - source here/bin/activate
+  - hererocks $HOME/here -r^ --$LUA
+  - source $HOME/here/bin/activate
 
 install:
   - luarocks show moonscript > /dev/null 2>&1 || luarocks install moonscript

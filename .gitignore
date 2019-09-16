@@ -587,3 +587,6 @@ lint_config.lua
 
 # Ignore compiled files
 /out
+
+# Ignore hererocks installation
+/here
