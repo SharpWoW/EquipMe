@@ -1,23 +1,38 @@
-language: minimal
+language: python
+sudo: false
+
+env:
+  - LUA="lua=5.1"
 
 addons:
   apt:
     packages:
     - jq
-    - luarocks
+
+cache:
+  directories:
+    - here
+    - $HOME/.cache/pip
+
+before_install:
+  - pip install --user hererocks
+  - hererocks here -r^ --$LUA
+  - source here/bin/activate
 
 install:
-  - luarocks install --local moonscript
-  - luarocks install --local luacheck
-  - luarocks install --local busted
+  - luarocks show moonscript > /dev/null 2>&1 || luarocks install moonscript
+  - luarocks show luacheck > /dev/null 2>&1 ||luarocks install luacheck
+  - luarocks show busted > /dev/null 2>&1 ||luarocks install busted
   - curl -fsSLo release.sh https://raw.githubusercontent.com/BigWigsMods/packager/master/release.sh
   - chmod +x release.sh
 
 before_script:
-  - /home/travis/.luarocks/bin/luacheck . -q --codes --ranges
+  - moonc lint_config.moon
+  - moonc -l .
+  - luacheck . -q --codes --ranges
 
 script:
-  - /home/travis/.luarocks/bin/busted
+  - busted
 
 deploy:
   #- provider: script

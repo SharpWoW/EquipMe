@@ -569,6 +569,10 @@ MigrationBackup/
 
 # End of https://www.gitignore.io/api/vim,lua,linux,macos,emacs,windows,notepadpp,sublimetext,visualstudio
 
+# MoonScript
+# Ignore generated lint config
+lint_config.lua
+
 .env
 
 *.zip
