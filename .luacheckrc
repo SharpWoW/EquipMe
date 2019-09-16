@@ -19,6 +19,7 @@ stds.wow = {
     "IsShiftKeyDown",
     "SlashCmdList",
     "StaticPopup_Show",
+    "strsplit",
     "strtrim",
     "wipe",
     "INVSLOT_TRINKET2",

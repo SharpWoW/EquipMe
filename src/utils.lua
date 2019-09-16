@@ -60,14 +60,7 @@ function utils.interpolate(str, data)
 end
 
 utils.trim = strtrim
-
-function utils.split(str)
-  local result = {}
-  for token in string.gmatch(str, "[^%s]+") do
-    result[#result + 1] = token
-  end
-  return result
-end
+utils.split = strsplit
 
 local function resolve_color(color)
   if type(color) ~= "string" then return nil end
