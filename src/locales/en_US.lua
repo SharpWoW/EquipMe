@@ -37,6 +37,7 @@ L["TEST_ERROR"] = "Testing the error logging"
 L["INVENTORY_SET_NOT_FOUND"] = "Couldn't find set %(id)s (%(name)q)"
 L["INVENTORY_SAVE_SAVED"] = "Save current equipment to set %(name)q"
 L["INVENTORY_DELETE_DELETED"] = "Deleted set %(name)q"
+L["INVENTORY_EQUIP_IN_COMBAT"] = "Currently in combat, %(name)q will be equipped after combat ends"
 L["INVENTORY_EQUIP_EQUIPPED"] = "Equipped %(name)q"
 
 L["OPTIONS_SHOW_NAME"] = "Show options window"

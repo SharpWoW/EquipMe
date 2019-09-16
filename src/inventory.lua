@@ -174,7 +174,12 @@ function inventory:Equip(set)
   for slot_id, item_id in pairs(set.equipped) do
     T.items:Equip(item_id, slot_id)
   end
-  T:LogInfo(L { "INVENTORY_EQUIP_EQUIPPED", name = set.name })
+
+  if T.is_in_combat then
+    T:LogInfo(L { "INVENTORY_EQUIP_IN_COMBAT", name = set.name })
+  else
+    T:LogInfo(L { "INVENTORY_EQUIP_EQUIPPED", name = set.name })
+  end
 end
 
 T.inventory = inventory
