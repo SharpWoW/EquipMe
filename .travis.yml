@@ -22,8 +22,8 @@ before_install:
 install:
   - luarocks show moonscript > /dev/null 2>&1 || luarocks install moonscript
   - luarocks show moonpick > /dev/null 2>&1 || luarocks install moonpick
-  - luarocks show luacheck > /dev/null 2>&1 ||luarocks install luacheck
-  - luarocks show busted > /dev/null 2>&1 ||luarocks install busted
+  - luarocks show luacheck > /dev/null 2>&1 || luarocks install luacheck
+  - luarocks show busted > /dev/null 2>&1 || luarocks install busted
   - curl -fsSLo release.sh https://raw.githubusercontent.com/BigWigsMods/packager/master/release.sh
   - chmod +x release.sh
 
