@@ -127,7 +127,10 @@ function inventory:GetEquipped()
   local equipped = {}
 
   for _, slot in pairs(SLOTS) do
-    equipped[slot.id] = GetInventoryItemLink("player", slot.id)
+    local item_link = GetInventoryItemLink("player", slot.id)
+    equipped[slot.id] = {
+      link = GetInventoryItemLink("player", slot.id)
+    }
   end
 
   return equipped
@@ -171,8 +174,8 @@ end
 
 function inventory:Equip(set)
   T:LogDebug("Equipping set %s (%q)", set.id, set.name)
-  for slot_id, item_id in pairs(set.equipped) do
-    T.items:Equip(item_id, slot_id)
+  for slot_id, item in pairs(set.equipped) do
+    T.items:Equip(item.link, slot_id)
   end
 
   if T.is_in_combat then
