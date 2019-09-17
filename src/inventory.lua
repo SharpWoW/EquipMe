@@ -129,7 +129,7 @@ function inventory:GetEquipped()
   for _, slot in pairs(SLOTS) do
     local item_link = GetInventoryItemLink("player", slot.id)
     equipped[slot.id] = {
-      link = GetInventoryItemLink("player", slot.id)
+      link = item_link
     }
   end
 
