@@ -40,6 +40,14 @@ externals:
         url: https://repos.wowace.com/wow/ace-gui-3-0-shared-media-widgets/trunk
         tag: latest
 
+ignore:
+    - *.sh
+    - *.bat
+    - *.ps1
+    - lint_config.moon
+    - spec
+    - *.svg
+
 tools-used:
     - libdatabroker-1-1
 
