@@ -28,6 +28,7 @@ function T:OnInitialize()
   self:InitializeEvents()
   self:InitializeCommands()
   self:InitializeBroker()
+  self.character:Initialize()
 
   self:LogDebug("Initialized!")
 end
