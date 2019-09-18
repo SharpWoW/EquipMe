@@ -45,6 +45,7 @@ function T:InitializeOptions()
             get = function() return T.db.profile.logging.level end,
             set = function(_, value)
               T.db.profile.logging.level = value
+              T:Log(value, L { "OPTIONS_GENERAL_LOGLEVEL_SET", level = T.logging.level_names[value] })
             end,
             style = "dropdown"
           }

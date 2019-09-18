@@ -82,7 +82,7 @@ local function format(message, ...)
 end
 
 function T:GetLogLevel()
-  local level = self.db.profile.logging.level
+  local level = self.db and self.db.profile.logging.level or DEFAULT_THRESHOLD
   local name = logging.level_names[level]
   return level, name
 end
@@ -93,7 +93,7 @@ end
 
 function T:Log(level, message, ...)
   -- Default to INFO if db hasn't been initialized yet
-  local threshold = self.db and self.db.profile.logging.level or DEFAULT_THRESHOLD
+  local threshold = self:GetLogLevel()
   if level < threshold then return end
   local formatted = format(message, ...)
   local level_format = FORMATS[level]
@@ -118,6 +118,26 @@ end
 
 function T:LogError(message, ...)
   self:Log(logging.levels.ERROR, message, ...)
+end
+
+function T:IsTraceEnabled()
+  return self:GetLogLevel() <= logging.levels.TRACE
+end
+
+function T:IsDebugEnabled()
+  return self:GetLogLevel() <= logging.levels.DEBUG
+end
+
+function T:IsInfoEnabled()
+  return self:GetLogLevel() <= logging.levels.INFO
+end
+
+function T:IsWarnEnabled()
+  return self:GetLogLevel() <= logging.levels.WARN
+end
+
+function T:IsErrorEnabled()
+  return self:GetLogLevel() <= logging.levels.ERROR
 end
 
 T.logging = logging
