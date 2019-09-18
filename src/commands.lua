@@ -51,6 +51,14 @@ register("testlog", function()
   T:LogError(L"TEST_ERROR")
 end, L"COMMANDS_TESTLOG_HELP")
 
+register({ "list", "ls" }, function(self)
+  local sets = self.sets:GetAll()
+  self:LogInfo(L"COMMANDS_LIST_AVAILABLE")
+  for _, set in pairs(sets) do
+    self:LogInfo(L { "COMMANDS_LIST_SET", id = set.id, name = set.name })
+  end
+end, L"COMMANDS_LIST_HELP")
+
 register("save", function(self, input)
   local name = self:GetArgs(input, 1)
 
@@ -59,7 +67,7 @@ register("save", function(self, input)
     return
   end
 
-  self.inventory:Save(name)
+  self.sets:Save(name)
 end, L"COMMANDS_SAVE_HELP")
 
 register("load", function(self, input)
@@ -70,7 +78,7 @@ register("load", function(self, input)
     return
   end
 
-  self.inventory:Load(name)
+  self.sets:Load(name)
 end, L"COMMANDS_LOAD_HELP")
 
 register("delete", function(self, input)
@@ -81,7 +89,7 @@ register("delete", function(self, input)
     return
   end
 
-  self.inventory:Delete(name)
+  self.sets:Delete(name)
 end, L"COMMANDS_DELETE_HELP")
 
 function T:InitializeCommands()

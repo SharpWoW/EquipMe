@@ -10,108 +10,130 @@ local _, T = ...
 
 local L = T.I18n
 
+local map = T.utils.map
+
 local inventory = {}
 
 local SLOTS = {
   [INVSLOT_HEAD] = {
     id = INVSLOT_HEAD,
     name = "HEADSLOT",
-    types = { "INVTYPE_HEAD" }
+    types = { "INVTYPE_HEAD" },
+    frame = "CharacterHeadSlot"
   },
   [INVSLOT_NECK] = {
     id = INVSLOT_NECK,
     name = "NECKSLOT",
-    types = { "INVTYPE_NECK" }
+    types = { "INVTYPE_NECK" },
+    frame = "CharacterNeckSlot"
   },
   [INVSLOT_SHOULDER] = {
     id = INVSLOT_SHOULDER,
     name = "SHOULDERSLOT",
-    types = { "INVTYPE_SHOULDER" }
+    types = { "INVTYPE_SHOULDER" },
+    frame = "CharacterShoulderSlot"
   },
   [INVSLOT_BACK] = {
     id = INVSLOT_BACK,
     name = "BACKSLOT",
-    types = { "INVTYPE_CLOAK" }
+    types = { "INVTYPE_CLOAK" },
+    frame = "CharacterBackSlot"
   },
   [INVSLOT_CHEST] = {
     id = INVSLOT_CHEST,
     name = "CHESTSLOT",
-    types = { "INVTYPE_CHEST", "INVTYPE_ROBE" }
+    types = { "INVTYPE_CHEST", "INVTYPE_ROBE" },
+    frame = "CharacterChestSlot"
   },
   [INVSLOT_BODY] = {
     id = INVSLOT_BODY,
     name = "BODYSLOT",
-    types = { "INVTYPE_BODY" }
+    types = { "INVTYPE_BODY" },
+    frame = "CharacterShirtSlot"
   },
   [INVSLOT_TABARD] = {
     id = INVSLOT_TABARD,
     name = "TABARDSLOT",
-    types = { "INVTYPE_TABARD" }
+    types = { "INVTYPE_TABARD" },
+    frame = "CharacterTabardSlot"
   },
   [INVSLOT_WRIST] = {
     id = INVSLOT_WRIST,
     name = "WRISTSLOT",
-    types = { "INVTYPE_WRIST" }
+    types = { "INVTYPE_WRIST" },
+    frame = "CharacterWristSlot"
   },
   [INVSLOT_HAND] = {
     id = INVSLOT_HAND,
     name = "HANDSSLOT",
-    types = { "INVTYPE_HAND" }
+    types = { "INVTYPE_HAND" },
+    frame = "CharacterHandsSlot"
   },
   [INVSLOT_WAIST] = {
     id = INVSLOT_WAIST,
     name = "WAISTSLOT",
-    types = { "INVTYPE_WAIST" }
+    types = { "INVTYPE_WAIST" },
+    frame = "CharacterWaistSlot"
   },
   [INVSLOT_LEGS] = {
     id = INVSLOT_LEGS,
     name = "LEGSSLOT",
-    types = { "INVTYPE_LEGS" }
+    types = { "INVTYPE_LEGS" },
+    frame = "CharacterLegsSlot"
   },
   [INVSLOT_FEET] = {
     id = INVSLOT_FEET,
     name = "FEETSLOT",
-    types = { "INVTYPE_FEET" }
+    types = { "INVTYPE_FEET" },
+    frame = "CharacterFeetSlot"
   },
   [INVSLOT_FINGER1] = {
     id = INVSLOT_FINGER1,
     name = "FINGER0SLOT",
-    types = { "INVTYPE_FINGER" }
+    types = { "INVTYPE_FINGER" },
+    frame = "CharacterFinger0Slot"
   },
   [INVSLOT_FINGER2] = {
     id = INVSLOT_FINGER2,
     name = "FINGER1SLOT",
-    types = { "INVTYPE_FINGER" }
+    types = { "INVTYPE_FINGER" },
+    frame = "CharacterFinger1Slot"
   },
   [INVSLOT_TRINKET1] = {
     id = INVSLOT_TRINKET1,
     name = "TRINKET0SLOT",
-    types = { "INVTYPE_TRINKET" }
+    types = { "INVTYPE_TRINKET" },
+    frame = "CharacterTrinket0Slot"
   },
   [INVSLOT_TRINKET2] = {
     id = INVSLOT_TRINKET2,
     name = "TRINKET1SLOT",
-    types = { "INVTYPE_TRINKET" }
+    types = { "INVTYPE_TRINKET" },
+    frame = "CharacterTrinket1Slot"
   },
   [INVSLOT_MAINHAND] = {
     id = INVSLOT_MAINHAND,
     name = "MAINHANDSLOT",
-    types = { "INVTYPE_WEAPON", "INVTYPE_WEAPONMAINHAND", "INVTYPE_2HWEAPON" }
+    types = { "INVTYPE_WEAPON", "INVTYPE_WEAPONMAINHAND", "INVTYPE_2HWEAPON" },
+    frame = "CharacterMainHandSlot"
   },
   [INVSLOT_OFFHAND] = {
     id = INVSLOT_OFFHAND,
     name = "OFFHANDSLOT",
-    types = { "INVTYPE_WEAPONOFFHAND", "INVTYPE_SHIELD" }
+    types = { "INVTYPE_WEAPONOFFHAND", "INVTYPE_SHIELD" },
+    frame = "CharacterSecondaryHandSlot"
   },
   [INVSLOT_RANGED] = {
     id = INVSLOT_RANGED,
     name = "RANGEDSLOT",
-    types = { "INVTYPE_RANGED", "INVTYPE_RELIC" }
+    types = { "INVTYPE_RANGED", "INVTYPE_RELIC" },
+    frame = "CharacterRangedSlot"
   },
   [INVSLOT_AMMO] = {
     id = INVSLOT_AMMO,
     name = "AMMOSLOT",
-    types = { "INVTYPE_AMMO" }
+    types = { "INVTYPE_AMMO" },
+    frame = "CharacterAmmoSlot"
   }
 }
 
@@ -121,55 +143,17 @@ end
 
 inventory.SLOTS = SLOTS
 
-local function to_id(name) return name:lower() end
-
-function inventory:GetEquipped()
-  local equipped = {}
-
-  for _, slot in pairs(SLOTS) do
-    local item_link = GetInventoryItemLink("player", slot.id)
-    equipped[slot.id] = {
+function inventory:Get(slot_id)
+  if slot_id then
+    local item_id = GetInventoryItemID("player", slot_id)
+    local item_link = GetInventoryItemLink("player", slot_id)
+    return {
+      id = item_id,
       link = item_link
     }
   end
 
-  return equipped
-end
-
-function inventory:Save(name)
-  local id = to_id(name)
-  local equipped = self:GetEquipped()
-  local set = {
-    id = id,
-    name = name,
-    equipped = equipped
-  }
-  T.db.profile.sets[id] = set
-  T:LogInfo(L { "INVENTORY_SAVE_SAVED", id = id, name = name })
-end
-
-function inventory:Load(name)
-  local id = to_id(name)
-  local set = T.db.profile.sets[id]
-
-  if not set then
-    T:LogError(L { "INVENTORY_SET_NOT_FOUND", id = id, name = name })
-    return
-  end
-
-  self:Equip(set)
-end
-
-function inventory:Delete(name)
-  local id = to_id(name)
-
-  if not T.db.profile.sets[id] then
-    T:LogError(L { "INVENTORY_SET_NOT_FOUND", id = id, name = name })
-    return
-  end
-
-  T.db.profile.sets[id] = nil
-  T:LogInfo(L { "INVENTORY_DELETE_DELETED", id = id, name = name })
+  return map(SLOTS, function(slot) return self:Get(slot.id) end)
 end
 
 function inventory:Equip(set)

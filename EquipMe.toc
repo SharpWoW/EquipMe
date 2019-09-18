@@ -63,3 +63,4 @@ src\gui.lua
 src\broker.lua
 src\items.lua
 src\inventory.lua
+src\sets.lua

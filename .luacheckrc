@@ -12,6 +12,7 @@ stds.wow = {
     "DEFAULT_CHAT_FRAME",
     "EquipItemByName",
     "GameTooltip",
+    "GetInventoryItemID",
     "GetInventoryItemLink",
     "GetItemInfo",
     "GetLocale",
