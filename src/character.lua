@@ -13,7 +13,7 @@ local inventory = T.inventory
 
 local character = {}
 
-local frames = {}
+local frames = {} -- luacheck: ignore 241
 
 local function create_frames()
   for slot_id, info in pairs(inventory.SLOTS) do
