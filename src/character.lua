@@ -21,6 +21,8 @@ local function create_frames()
     local frame = CreateFrame("Frame", nil, parent)
     frames[slot_id] = frame
 
+    frame:SetPoint("TOPLEFT", parent, "TOPRIGHT")
+
     parent:HookScript("OnEnter", function(self)
       if not T:IsTraceEnabled() then return end
       local current = inventory:Get(slot_id).link
