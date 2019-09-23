@@ -11,6 +11,7 @@ local _, T = ...
 local lua_sformat = string.format
 local lua_gsub = string.gsub
 local type = type
+local tinsert = table.insert
 
 local utils = {
   colors = {
@@ -34,12 +35,37 @@ local utils = {
   }
 }
 
+function utils.foreach(tbl, func)
+  for _, v in pairs(tbl) do func(v) end
+end
+
 function utils.map(tbl, func)
   local result = {}
   for k, v in pairs(tbl) do
     result[k] = func(v)
   end
   return result
+end
+
+function utils.filter(tbl, predicate)
+  local result = {}
+  for k, v in pairs(tbl) do
+    if predicate(v) then
+      if type(k) == "number" then
+        tinsert(result, v)
+      else
+        result[k] = v
+      end
+    end
+  end
+  return result
+end
+
+function utils.contains(tbl, value)
+  for _, v in pairs(tbl) do
+    if v == value then return true end
+  end
+  return false
 end
 
 local INTERP_PATTERN = "%%%((%a%w*)%)([-0-9%.]*[cdeEfgGiouxXsq])"

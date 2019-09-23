@@ -63,5 +63,6 @@ src\gui.lua
 src\broker.lua
 src\items.lua
 src\inventory.lua
+src\bags.lua
 src\sets.lua
 src\character.lua

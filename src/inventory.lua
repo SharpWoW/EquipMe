@@ -169,4 +169,23 @@ function inventory:Equip(set)
   end
 end
 
+-- PutItemInBackpack()
+-- PutItemInBag(bagId)
+function inventory:Unequip(slot_id)
+  local free_bag_id = T.bags:FindFreeBagId()
+
+  if not free_bag_id then
+    T:LogError("Cannot unequip item if inventory is full")
+  end
+
+  PickupInventoryItem(slot_id)
+
+  if free_bag_id == BACKPACK_CONTAINER then
+    PutItemInBackpack()
+  else
+    local invslot = ContainerIDToInventoryID(free_bag_id)
+    PutItemInBag(invslot)
+  end
+end
+
 T.inventory = inventory
